@@ -1,6 +1,7 @@
 set(skola_HEADER
    databazova_polozka.h
    radek.h
+   kategorie.h
 )
 
 PREPEND(skola_HEADER)
