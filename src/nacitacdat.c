@@ -19,6 +19,7 @@ Pozorovani* nacist_pozorovani(char* nazev_souboru) {
     if (soubor == NULL) {
         printf("CHYBA! SOUBOR \"%s\" NELZE OTEVŘÍT\n", nazev_souboru);
 
+        free(nactene_pozorovani->datum_pozorovani);
         free(nactene_pozorovani);
         return NULL;
     }
@@ -33,6 +34,7 @@ Pozorovani* nacist_pozorovani(char* nazev_souboru) {
     if (strcmp(radek,"POZOROVANI STRUKTURA")) {
         printf("CHYBA! SOUBOR \"%s\" NENI PLATNYM SOUBOREM S POZOROVANIM\nPRECTENO \"%s\"", nazev_souboru, radek);
 
+        free(nactene_pozorovani->datum_pozorovani);
         free(nactene_pozorovani);
         fclose(soubor);
         return NULL;
@@ -47,14 +49,6 @@ Pozorovani* nacist_pozorovani(char* nazev_souboru) {
         
         // Kopie pro vyhledávání
         char* radek_kopie = (char*) calloc(delka_radku + 1, sizeof(char));
-
-        if (radek_kopie == NULL) {
-            fgets(radek, sizeof(radek), soubor);
-            radek[strcspn(radek, "\n")] = 0; //Odstraneni znaku noveho radku
-
-            continue;
-        }
-
         strncpy(radek_kopie, radek, delka_radku);
 
         // Pracovni retezec
@@ -73,9 +67,19 @@ Pozorovani* nacist_pozorovani(char* nazev_souboru) {
 
         // Hlednání patřičné definice
         if (!strcmp(definice, "poloha")) {
-            nactene_pozorovani->poloha = kontext;
+            // Zkopirovani retezce pro ulozeni do struktury
+            unsigned int delka_kontextu = strlen(kontext);
+            char* kontext_kopie = (char*) calloc(delka_kontextu + 1, sizeof(char));
+            strncpy(kontext_kopie, kontext, delka_kontextu);
+
+            nactene_pozorovani->poloha = kontext_kopie;
         } else if (!strcmp(definice, "poznamka")) {
-            nactene_pozorovani->poznamka = kontext;
+            // Zkopirovani retezce pro ulozeni do struktury
+            unsigned int delka_kontextu = strlen(kontext);
+            char* kontext_kopie = (char*) calloc(delka_kontextu + 1, sizeof(char));
+            strncpy(kontext_kopie, kontext, delka_kontextu);
+
+            nactene_pozorovani->poznamka = kontext_kopie;
         } else if (!strcmp(definice, "datum")) {
             sscanf(kontext, "%u %u %u %u %u",
                 &(nactene_pozorovani->datum_pozorovani->den),
@@ -85,6 +89,8 @@ Pozorovani* nacist_pozorovani(char* nazev_souboru) {
                 &(nactene_pozorovani->datum_pozorovani->minuty)
             );
         }
+
+        free(radek_kopie);
         fgets(radek, sizeof(radek), soubor);
         radek[strcspn(radek, "\n")] = 0; //Odstraneni znaku noveho radku
     }
