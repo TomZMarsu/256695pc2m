@@ -3,6 +3,7 @@ set(skola_SRC
     datum.c
     vypisovac.c
     nacitacdat.c
+    stringutil.c
 )
 
 PREPEND(skola_SRC)

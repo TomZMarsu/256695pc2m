@@ -9,5 +9,25 @@ KONEC HLAVICEK
 PTAK
 druh Sykora konadra
 pocet 2
-poznamka Hasterive pisteli
+poznamka Krmili se na krmitku
+KONEC PTAKA
+
+PTAK
+druh Strakapoud velky
+pocet 1
+KONEC PTAKA
+
+PTAK
+druh Vrabec domaci
+pocet 10
+KONEC PTAKA
+
+PTAK
+druh Orel skalni
+pocet 1
+poznamka Fascinujici, ale nevim, co tady dela
+KONEC PTAKA
+
+PTAK
+druh Kos cerny
 KONEC PTAKA

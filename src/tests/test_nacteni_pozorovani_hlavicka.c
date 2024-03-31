@@ -8,6 +8,8 @@ int main() {
         perror("CHYBA PRI PRACI SE SOUBOREM");
         return 1;
     }
+    
+
 
     // Kontrola data
     if (nactene_pozorovani->datum_pozorovani->den != 10) {
@@ -42,6 +44,7 @@ int main() {
 
     // Kontrola poznamky
     if (strcmp(nactene_pozorovani->poznamka, "nejaka poznamka")) {
+        printf("test\n");
         perror("NACTENA POZNAMKA NESOUHLASI (OCEKAVANO: \"nejaka poznamka\")");
         printf("NACTENO: %s\n", nactene_pozorovani->poznamka);
         return 7;

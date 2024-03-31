@@ -12,6 +12,7 @@ set(test_nacteni_pozorovani_hlavicka_SRC
     test_nacteni_pozorovani_hlavicka.c
     ../nacitacdat.c
     ../datum.c
+    ../stringutil.c
 )
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test_nacteni_pozorovani/pozorovani1.dat
      DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tests/test_nacteni_pozorovani)
@@ -23,9 +24,22 @@ set(test_nacteni_pozorovani_hlavicka_prazdne_SRC
     test_nacteni_pozorovani_hlavicka_prazdne.c
     ../nacitacdat.c
     ../datum.c
+    ../stringutil.c
 )
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test_nacteni_pozorovani/pozorovani2.dat
      DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tests/test_nacteni_pozorovani)
 add_executable(test_nacteni_pozorovani_hlavicka_prazdne ${test_nacteni_pozorovani_hlavicka_prazdne_SRC})
 target_include_directories(test_nacteni_pozorovani_hlavicka_prazdne PUBLIC ../../include/)
 add_test(NAME test_nacteni_pozorovani_hlavicka_prazdne  COMMAND test_nacteni_pozorovani_hlavicka_prazdne WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+set(test_nacteni_pozorovani_cele_SRC
+    test_nacteni_pozorovani_cele.c
+    ../nacitacdat.c
+    ../datum.c
+    ../stringutil.c
+)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test_nacteni_pozorovani/pozorovani_cele1.dat
+     DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tests/test_nacteni_pozorovani)
+add_executable(test_nacteni_pozorovani_cele ${test_nacteni_pozorovani_cele_SRC})
+target_include_directories(test_nacteni_pozorovani_cele PUBLIC ../../include/)
+add_test(NAME test_nacteni_pozorovani_cele  COMMAND test_nacteni_pozorovani_cele WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})

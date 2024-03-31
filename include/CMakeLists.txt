@@ -4,6 +4,7 @@ set(skola_HEADER
    pozorovani.h
    vypisovac.h
    nacitacdat.h
+   stringutil.h
 )
 
 PREPEND(skola_HEADER)
