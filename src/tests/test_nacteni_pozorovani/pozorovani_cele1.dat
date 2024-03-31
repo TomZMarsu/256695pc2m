@@ -1,0 +1,33 @@
+POZOROVANI STRUKTURA
+
+datum 10 6 2003 20 01
+poznamka nejaka poznamka
+poloha Frydek-Mistek, v parku u magistratu
+
+KONEC HLAVICEK
+
+PTAK
+druh Sykora konadra
+pocet 2
+poznamka Krmili se na krmitku
+KONEC PTAKA
+
+PTAK
+druh Strakapoud velky
+pocet 1
+KONEC PTAKA
+
+PTAK
+druh Vrabec domaci
+pocet 10
+KONEC PTAKA
+
+PTAK
+druh Orel skalni
+pocet 1
+poznamka Fascinujici, ale nevim, co tady dela
+KONEC PTAKA
+
+PTAK
+druh Kos cerny
+KONEC PTAKA

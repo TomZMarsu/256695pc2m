@@ -30,7 +30,7 @@ int main() {
     dnesni_datum.rok = 2024;
     dnesni_datum.mesic = 7;
 
-    dnes.datum_pozorovani = dnesni_datum;
+    dnes.datum_pozorovani = &dnesni_datum;
     dnes.poloha = "Bukovec";
     dnes.poznamka = "Vetrno";
     dnes.prvni_ptak = &havran;
