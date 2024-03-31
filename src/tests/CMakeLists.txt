@@ -7,3 +7,25 @@ add_test(NAME test_vypis_tabulky  COMMAND test_vypis_tabulky)
 add_executable(test_vypis_ptaka test_vypis_ptaka.c ../vypisovac.c ../datum.c)
 target_include_directories(test_vypis_ptaka PUBLIC ../../include/)
 add_test(NAME test_vypis_ptaka  COMMAND test_vypis_ptaka)
+
+set(test_nacteni_pozorovani_hlavicka_SRC
+    test_nacteni_pozorovani_hlavicka.c
+    ../nacitacdat.c
+    ../datum.c
+)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test_nacteni_pozorovani/pozorovani1.dat
+     DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tests/test_nacteni_pozorovani)
+add_executable(test_nacteni_pozorovani_hlavicka ${test_nacteni_pozorovani_hlavicka_SRC})
+target_include_directories(test_nacteni_pozorovani_hlavicka PUBLIC ../../include/)
+add_test(NAME test_nacteni_pozorovani_hlavicka  COMMAND test_nacteni_pozorovani_hlavicka WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+set(test_nacteni_pozorovani_hlavicka_prazdne_SRC
+    test_nacteni_pozorovani_hlavicka_prazdne.c
+    ../nacitacdat.c
+    ../datum.c
+)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test_nacteni_pozorovani/pozorovani2.dat
+     DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tests/test_nacteni_pozorovani)
+add_executable(test_nacteni_pozorovani_hlavicka_prazdne ${test_nacteni_pozorovani_hlavicka_prazdne_SRC})
+target_include_directories(test_nacteni_pozorovani_hlavicka_prazdne PUBLIC ../../include/)
+add_test(NAME test_nacteni_pozorovani_hlavicka_prazdne  COMMAND test_nacteni_pozorovani_hlavicka_prazdne WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})

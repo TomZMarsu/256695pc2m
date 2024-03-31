@@ -3,6 +3,7 @@ set(skola_HEADER
    ptak.h
    pozorovani.h
    vypisovac.h
+   nacitacdat.h
 )
 
 PREPEND(skola_HEADER)
