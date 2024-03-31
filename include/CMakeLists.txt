@@ -1,7 +1,8 @@
 set(skola_HEADER
-   databazova_polozka.h
-   radek.h
-   kategorie.h
+   datum.h
+   ptak.h
+   pozorovani.h
+   vypisovac.h
 )
 
 PREPEND(skola_HEADER)

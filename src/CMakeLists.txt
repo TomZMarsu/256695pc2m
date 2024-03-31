@@ -1,5 +1,7 @@
 set(skola_SRC
     main.c
+    datum.c
+    vypisovac.c
 )
 
 PREPEND(skola_SRC)
