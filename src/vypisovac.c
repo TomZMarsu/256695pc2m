@@ -26,11 +26,17 @@ int vypis_tabulku_z_pozorovani(Pozorovani pozorovani) {
         SLOUPEC_POZNAMKA
     );
 
+    int pocet_radku = 1;
+    
+    // Jestliže není žádný pták v pozorovaní, vypis pouze hlavicky a dal nepokracuj
+    if (pozorovani.prvni_ptak == NULL) {
+        printf("    -ZADNY PTAK V SEZNAMU-\n");
+        return pocet_radku+1;
+    }
+
     Ptak nacteny_ptak = *(pozorovani.prvni_ptak);
     unsigned int ID_pro_ptaka = 1;
 
-    int pocet_radku = 1;
-    
     bool byl_nacten_posledni_ptak = false;
     while (!byl_nacten_posledni_ptak) {
         nacteny_ptak.ID = ID_pro_ptaka;
