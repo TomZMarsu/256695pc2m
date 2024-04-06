@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-void vypis_informace_o_ptakovi(Ptak ptak);
-void vypis_tabulku_z_pozorovani(Pozorovani pozorovani);
+int vypis_informace_o_ptakovi(Ptak ptak);
+int vypis_tabulku_z_pozorovani(Pozorovani pozorovani);
 
 #endif
