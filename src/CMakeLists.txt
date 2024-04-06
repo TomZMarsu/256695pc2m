@@ -6,6 +6,7 @@ set(skola_SRC
     stringutil.c
     ptak.c
     pozorovani.c
+    ovladac_pozorovani.c
 )
 
 PREPEND(skola_SRC)

@@ -1,15 +1,19 @@
 #include "vypisovac.h"
 
-void vypis_informace_o_ptakovi(Ptak ptak) {
+// Vraci pocet radku
+int vypis_informace_o_ptakovi(Ptak ptak) {
     printf("INFORMACE O PTAKOVI \"%s\":\n", ptak.nazev);
     printf("===============================\n");
     printf("Popis vzhledu: %s\n", ptak.popis_vzhledu);
     printf("Čas výskytu  : %s\n", ptak.vyskyt);
     printf("-------------------------------\n\n");
+    
+    return 6;
 
 }
 
-void vypis_tabulku_z_pozorovani(Pozorovani pozorovani) {
+// Vraci pocet radku
+int vypis_tabulku_z_pozorovani(Pozorovani pozorovani) {
     const char SLOUPEC_ID[] = "ID";
     const char SLOUPEC_DRUH[] = "DRUH";
     const char SLOUPEC_POCET[] = "POCET";
@@ -22,9 +26,17 @@ void vypis_tabulku_z_pozorovani(Pozorovani pozorovani) {
         SLOUPEC_POZNAMKA
     );
 
+    int pocet_radku = 1;
+    
+    // Jestliže není žádný pták v pozorovaní, vypis pouze hlavicky a dal nepokracuj
+    if (pozorovani.prvni_ptak == NULL) {
+        printf("    -ZADNY PTAK V SEZNAMU-\n");
+        return pocet_radku+1;
+    }
+
     Ptak nacteny_ptak = *(pozorovani.prvni_ptak);
     unsigned int ID_pro_ptaka = 1;
-    
+
     bool byl_nacten_posledni_ptak = false;
     while (!byl_nacten_posledni_ptak) {
         nacteny_ptak.ID = ID_pro_ptaka;
@@ -36,6 +48,7 @@ void vypis_tabulku_z_pozorovani(Pozorovani pozorovani) {
             nacteny_ptak.pocet_nalezu, 
             nacteny_ptak.poznamky
         );
+        pocet_radku++;
 
         if (nacteny_ptak.dalsi_ptak == NULL) {
             byl_nacten_posledni_ptak = true;
@@ -44,4 +57,6 @@ void vypis_tabulku_z_pozorovani(Pozorovani pozorovani) {
 
         nacteny_ptak = *(nacteny_ptak.dalsi_ptak);
     }
+
+    return pocet_radku;
 }

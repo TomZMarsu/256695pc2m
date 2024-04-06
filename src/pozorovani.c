@@ -9,3 +9,14 @@ Pozorovani* pozorovani_init() {
 
     return pozorovani;
 }
+
+Ptak** posledni_ptak_v_pozorovani(Pozorovani* pozorovani) {
+    Ptak** momentalne_posledni_ptak = &(pozorovani->prvni_ptak);
+
+    while (*momentalne_posledni_ptak != NULL) {
+        Ptak* deref = *momentalne_posledni_ptak;
+        momentalne_posledni_ptak = &(deref->dalsi_ptak);
+    }
+
+    return momentalne_posledni_ptak;
+}

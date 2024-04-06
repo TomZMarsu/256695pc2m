@@ -53,3 +53,18 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test_nacteni_pozorovani/pozorovani_cele1.d
 add_executable(test_nacteni_pozorovani_cele ${test_nacteni_pozorovani_cele_SRC})
 target_include_directories(test_nacteni_pozorovani_cele PUBLIC ../../include/)
 add_test(NAME test_nacteni_pozorovani_cele  COMMAND test_nacteni_pozorovani_cele WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+set(test_mazani_radku_SRC
+    test_mazani_radku.c
+    ../nacitacdat.c
+    ../datum.c
+    ../stringutil.c
+    ../ptak.c
+    ../pozorovani.c
+    ../vypisovac.c
+)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test_nacteni_pozorovani/pozorovani_cele1.dat
+     DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tests/test_mazani_radku)
+add_executable(test_mazani_radku ${test_mazani_radku_SRC})
+target_include_directories(test_mazani_radku PUBLIC ../../include/)
+add_test(NAME test_mazani_radku  COMMAND test_mazani_radku WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
