@@ -2,18 +2,7 @@
 
 Pozorovani* nacist_pozorovani(char* nazev_souboru) {
     FILE *soubor = fopen(nazev_souboru, "r");
-    Pozorovani* nactene_pozorovani = (Pozorovani*) malloc(sizeof(Pozorovani));
-    nactene_pozorovani->datum_pozorovani = (Datum*) malloc(sizeof(Datum));
-
-    // Nastavovani nulovych hodnot
-    nactene_pozorovani->poloha = "";
-    nactene_pozorovani->poznamka = "";
-    nactene_pozorovani->prvni_ptak = NULL;
-    nactene_pozorovani->datum_pozorovani->den = 0;
-    nactene_pozorovani->datum_pozorovani->mesic = 0;
-    nactene_pozorovani->datum_pozorovani->rok = 0;
-    nactene_pozorovani->datum_pozorovani->hodiny = 0;
-    nactene_pozorovani->datum_pozorovani->minuty = 0;
+    Pozorovani* nactene_pozorovani = pozorovani_init();
 
 
     if (soubor == NULL) {
@@ -110,13 +99,7 @@ Pozorovani* nacist_pozorovani(char* nazev_souboru) {
             priznak_sken_ptaka = true;
 
             // Inicializace ptáka
-            novy_ptak = (Ptak*) malloc(sizeof(Ptak));
-            novy_ptak->nazev = "";
-            novy_ptak->ID = 0;
-            novy_ptak->pocet_nalezu = 0;
-            novy_ptak->popis_vzhledu = "";
-            novy_ptak->poznamky = "";
-            novy_ptak->vyskyt = ""; 
+            novy_ptak = ptak_init();
 
             continue;
         }

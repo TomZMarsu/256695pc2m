@@ -7,6 +7,7 @@
 #include <malloc.h>
 #include <stdbool.h>
 #include "stringutil.h"
+#include "ptak.h"
 
 Pozorovani* nacist_pozorovani(char* nazev_souboru);
 

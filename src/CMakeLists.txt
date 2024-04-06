@@ -4,6 +4,8 @@ set(skola_SRC
     vypisovac.c
     nacitacdat.c
     stringutil.c
+    ptak.c
+    pozorovani.c
 )
 
 PREPEND(skola_SRC)
