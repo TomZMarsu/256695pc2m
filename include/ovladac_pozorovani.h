@@ -13,5 +13,6 @@ Pozorovani* vykreslovat_pozorovani_novy();
 
 // SOUKROMÉ FUNKCE
 Ptak* opz_pridat_ptaka();
+bool opz_upravit_ptaka(Pozorovani** pozorovani);
 
 #endif

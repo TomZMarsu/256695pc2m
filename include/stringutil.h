@@ -16,4 +16,9 @@ char* nacti_string_od_uzivatele(char* pozadavek, bool vymazat_vstup);
 // Nacte vstup jako integer od uzivatele.
 int nacti_int_od_uzivatele(char* pozadavek, bool vymazat_vstup);
 
+// Upravi string na zaklade uzivatelskeho vstupu
+void uprav_string(char* sloupec, char** string_ktery_upravit);
+
+// Upravi int na zaklade uzivatelskeho vstupu
+void uprav_int(char* sloupec, int* int_ktery_upravit);
 #endif
