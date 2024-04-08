@@ -7,19 +7,20 @@ Pozorovani* vykreslovat_pozorovani_novy() {
     while(vypisovani_bezi) {
         int pocet_radku = 0;
         // Vykresleni pozorovani
-        pocet_radku += vypis_tabulku_z_pozorovani(pozorovani);
-
-        // Vypis moznosti
-        printf("\nNABIDKA:\n");
-        printf(" (1) Pridat ptaka\n");
-        printf(" (2) Upravit ptaka\n");
-        printf(" (3) Odstranit ptaka\n");
-        printf(" (4) Upravit udaje o pozorovani\n");
-        pocet_radku += OPZ_VELIKOST_NABIDKY+1;
+        pocet_radku += vypis_tabulku_z_pozorovani(pozorovani) + 1;
+        printf("\n");
         
         // Ziskani vstupu od uzivatele
         bool vstup_ziskan = false;
         while(!vstup_ziskan) {
+            // Vypis moznosti
+            printf("NABIDKA:\n");
+            printf(" (1) Pridat ptaka\n");
+            printf(" (2) Upravit ptaka\n");
+            printf(" (3) Odstranit ptaka\n");
+            printf(" (4) Upravit udaje o pozorovani\n");
+            pocet_radku += OPZ_VELIKOST_NABIDKY;
+
             switch (nacti_int_od_uzivatele("Vase volba", true))
             {
             case 1:
@@ -37,7 +38,8 @@ Pozorovani* vykreslovat_pozorovani_novy() {
                 break;
             
             case 3:
-                vstup_ziskan = true;
+                vstup_ziskan = opz_odstranit_ptaka(&pozorovani);
+                pocet_radku -= OPZ_VELIKOST_NABIDKY;
                 break;
 
             case 4:
@@ -45,10 +47,11 @@ Pozorovani* vykreslovat_pozorovani_novy() {
                 break;
             
             default:
+                vymazat_radek(OPZ_VELIKOST_NABIDKY);
+                pocet_radku -= OPZ_VELIKOST_NABIDKY;
                 break;
             }
         }
-
         vymazat_radek(pocet_radku);
     }
 
@@ -105,5 +108,51 @@ bool opz_upravit_ptaka(Pozorovani** pozorovani_ptr) {
     uprav_string("Poznamka", &(vybrany_ptak->poznamky));
 
     vymazat_radek(5);
+    return true;
+}
+
+bool opz_odstranit_ptaka(Pozorovani** pozorovani_ptr) {
+    // Vymazani nabidky
+    vymazat_radek(OPZ_VELIKOST_NABIDKY);
+
+    Pozorovani* pozorovani = *pozorovani_ptr;
+
+    int id = nacti_int_od_uzivatele("Zadejte ID ptaka, ktereho chcete odstranit", true);
+
+    // Najdi ptaka s danym ID
+    Ptak** momentalni_ptak = &(pozorovani->prvni_ptak);
+    Ptak** predchozi_ptak = NULL;
+    Ptak** nasledujici_ptak = NULL;
+    while (*momentalni_ptak != NULL) {
+        if ((*momentalni_ptak)->ID == id-1) predchozi_ptak = momentalni_ptak;
+        if ((*momentalni_ptak)->ID == id) break;
+
+        momentalni_ptak = &((*momentalni_ptak)->dalsi_ptak);
+    }
+
+    // Pokud je vybrana neplatna polozka, vrat se
+    if (*momentalni_ptak == NULL) return false;
+
+    // Nacteni nasledujiciho ptaka
+    nasledujici_ptak = &((*momentalni_ptak)->dalsi_ptak);
+
+    // Snímek adresy, která se dealokuje
+    Ptak* ptak_na_smazani = *momentalni_ptak;
+
+    // Přelinkovaní seznamu ptáku / vyšoupnutí ptáka z lineárního seznamu
+    if (predchozi_ptak == NULL) {
+        (*pozorovani_ptr)->prvni_ptak = *nasledujici_ptak;
+    } else {
+        (*predchozi_ptak)->dalsi_ptak = *nasledujici_ptak;
+    }
+
+    // Dealokace v paměti
+    free(ptak_na_smazani->nazev);
+    free(ptak_na_smazani->popis_vzhledu);
+    free(ptak_na_smazani->poznamky);
+    free(ptak_na_smazani->vyskyt);
+    free(ptak_na_smazani);
+
+    // Odstraneni probehlo zdarne
     return true;
 }

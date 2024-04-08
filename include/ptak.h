@@ -1,6 +1,7 @@
 #ifndef PTAK_H
 #define PTAK_H
 #include "malloc.h"
+#include "stringutil.h"
 
 typedef struct Ptak {
     char* nazev;
