@@ -5,8 +5,9 @@
 #include "stringutil.h"
 #include <stdbool.h>
 #include "ptak.h"
+#include "datum.h"
 
-#define OPZ_VELIKOST_NABIDKY 5
+#define OPZ_VELIKOST_NABIDKY 6
 
 // Vykresluje zobrazovac pro zcela nove pozorovani
 Pozorovani* vykreslovat_pozorovani_novy();

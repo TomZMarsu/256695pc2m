@@ -19,4 +19,7 @@ Pozorovani* pozorovani_init();
 // Nalezne posledniho ptaka v seznamu
 Ptak** posledni_ptak_v_pozorovani(Pozorovani* pozorovani);
 
+// Dealokace pozorovani
+void smazat_pozorovani(Pozorovani* pozorovani);
+
 #endif

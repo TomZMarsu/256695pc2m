@@ -22,4 +22,7 @@ typedef struct Ptak {
 // Konstruktor pro Ptak
 Ptak* ptak_init();
 
+// Dealokace ptaka
+void smazat_ptaka(Ptak* ptak);
+
 #endif

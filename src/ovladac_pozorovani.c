@@ -5,7 +5,14 @@ Pozorovani* vykreslovat_pozorovani_novy() {
     bool vypisovani_bezi = true;
 
     while(vypisovani_bezi) {
-        int pocet_radku = 0;
+        // Pocet radku pro system mazani radku. Zacina na sedmi, kvůli nasledně vypsané hlavičce
+        int pocet_radku = 5;
+        printf("------------------UDAJE O POZOROVANI------------------------\n");
+        printf("Datum: %s Misto: %s\n", datum_na_string(pozorovani->datum_pozorovani), pozorovani->poloha);
+        printf("Poznamky: \n%s\n", pozorovani->poznamka);
+        printf("------------------------------------------------------------\n");
+
+
         // Vykresleni pozorovani
         pocet_radku += vypis_tabulku_z_pozorovani(pozorovani) + 1;
         printf("\n");
@@ -19,6 +26,7 @@ Pozorovani* vykreslovat_pozorovani_novy() {
             printf(" (2) Upravit ptaka\n");
             printf(" (3) Odstranit ptaka\n");
             printf(" (4) Upravit udaje o pozorovani\n");
+            printf(" (5) Ukončit program\n");
             pocet_radku += OPZ_VELIKOST_NABIDKY;
 
             switch (nacti_int_od_uzivatele("Vase volba", true))
@@ -45,6 +53,11 @@ Pozorovani* vykreslovat_pozorovani_novy() {
             case 4:
                 vstup_ziskan = true;
                 break;
+
+            case 5:
+                smazat_pozorovani(pozorovani);
+
+                exit(EXIT_SUCCESS);
             
             default:
                 vymazat_radek(OPZ_VELIKOST_NABIDKY);
@@ -67,9 +80,9 @@ Ptak* opz_pridat_ptaka() {
     // Vyptávaní se na vstup
     printf("Zadejte informace o ptakovi\n");
     printf("============================\n");
-    ptak->nazev = nacti_string_od_uzivatele("Druh", false);
-    ptak->pocet_nalezu = nacti_int_od_uzivatele("Pocet nalezu", false);
-    ptak->poznamky = nacti_string_od_uzivatele("Poznamky", false);
+    nacti_string_od_uzivatele(&(ptak->nazev), "Druh", true);
+    ptak->pocet_nalezu = nacti_int_od_uzivatele("Pocet nalezu", true);
+    nacti_string_od_uzivatele(&(ptak->poznamky), "Poznamky", true);
 
     vymazat_radek(5);
     
@@ -147,12 +160,9 @@ bool opz_odstranit_ptaka(Pozorovani** pozorovani_ptr) {
     }
 
     // Dealokace v paměti
-    free(ptak_na_smazani->nazev);
-    free(ptak_na_smazani->popis_vzhledu);
-    free(ptak_na_smazani->poznamky);
-    free(ptak_na_smazani->vyskyt);
-    free(ptak_na_smazani);
+    smazat_ptaka(ptak_na_smazani);
 
     // Odstraneni probehlo zdarne
     return true;
 }
+

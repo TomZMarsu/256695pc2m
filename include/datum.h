@@ -2,7 +2,7 @@
 #define DATUM_H
 #include <stdio.h>
 #include <malloc.h>
-#define DELKA_TEXTOVE_REPREZENTACE 18
+#define DELKA_TEXTOVE_REPREZENTACE 19
 
 typedef struct Datum {
     unsigned short int den;
@@ -16,11 +16,12 @@ typedef struct Datum {
 } Datum;
 
 // String musí mít alespoň 18 znaků
-void datum_na_string(Datum* datum);
+char* datum_na_string(Datum* datum);
 
 // Konstruktor pro Datum
 Datum* datum_init();
 
-
+// Dealokace Data
+void smazat_datum(Datum* datum);
 
 #endif

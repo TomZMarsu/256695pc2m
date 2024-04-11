@@ -18,7 +18,8 @@ int vypis_tabulku_z_pozorovani(Pozorovani *pozorovani) {
     const char SLOUPEC_DRUH[] = "DRUH";
     const char SLOUPEC_POCET[] = "POCET";
     const char SLOUPEC_POZNAMKA[] = "POZNAMKA";
-
+    const char DELIC[] = "============================================================\n";
+    printf("%s", DELIC);
     printf("%3s %-20s %5s %s\n", 
         SLOUPEC_ID,
         SLOUPEC_DRUH, 
@@ -26,12 +27,13 @@ int vypis_tabulku_z_pozorovani(Pozorovani *pozorovani) {
         SLOUPEC_POZNAMKA
     );
 
-    int pocet_radku = 1;
+    int pocet_radku = 3;
     
     // Jestliže není žádný pták v pozorovaní, vypis pouze hlavicky a dal nepokracuj
     if (pozorovani->prvni_ptak == NULL) {
-        printf("    -ZADNY PTAK V SEZNAMU-\n");
-        return pocet_radku+1;
+        printf("\n        -ZADNY PTAK V SEZNAMU-\n\n");
+        printf("%s", DELIC);
+        return pocet_radku+3;
     }
 
     Ptak* nacteny_ptak = pozorovani->prvni_ptak;
@@ -57,6 +59,8 @@ int vypis_tabulku_z_pozorovani(Pozorovani *pozorovani) {
 
         nacteny_ptak = nacteny_ptak->dalsi_ptak;
     }
+
+    printf("%s", DELIC);
 
     return pocet_radku;
 }

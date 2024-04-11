@@ -3,8 +3,16 @@
 // Kopie stringu s dynamickou paměťovou alokaci
 void kopirovat_string(char** cil, char* zdroj) {
     unsigned int delka_stringu = strlen(zdroj);
-    *cil = (char*) calloc(delka_stringu + 1, sizeof(char));
-    strncpy(*cil, zdroj, delka_stringu);
+
+    // Uvolni predchozi pamet cile, aby se zabranilo memory leaku
+    if (*cil != NULL) {
+        free(*cil);
+        *cil = NULL;
+    }
+
+    //*cil = calloc(delka_stringu+1, sizeof(char));
+    //strcpy(*cil, zdroj);
+    *cil = strdup(zdroj);
 }
 
 // Vymaze z konzole dany pocet radku
@@ -16,7 +24,7 @@ void vymazat_radek(int pocet_radku) {
 }
 
 // Nacte vstup jako string od uzivatele. NACTI_VSTUP_VELIKOST_BUFFERU určuje maximální počet znaků
-char* nacti_string_od_uzivatele(char* pozadavek, bool vymazat_vstup) {
+void nacti_string_od_uzivatele(char** cil, char* pozadavek, bool vymazat_vstup) {
     char buffer[NACTI_VSTUP_VELIKOST_BUFFERU] = {0};
 
     printf("%s: ", pozadavek);
@@ -26,13 +34,10 @@ char* nacti_string_od_uzivatele(char* pozadavek, bool vymazat_vstup) {
     buffer[strcspn(buffer, "\n")] = 0;
 
     // Vytvoření nového stringu v paměti
-    char* precteny_vstup;
-    kopirovat_string(&precteny_vstup, buffer);
+    char* precteny_vstup = NULL;
+    kopirovat_string(cil, buffer);
 
     if (vymazat_vstup) vymazat_radek(1);
-
-    return precteny_vstup;
-
 }
 
 int nacti_int_od_uzivatele(char* pozadavek, bool vymazat_vstup) {
@@ -53,7 +58,8 @@ void uprav_string(char* sloupec, char** string_ktery_upravit) {
     int delka_vyzva = strlen(" ()") + strlen(*string_ktery_upravit) + strlen(sloupec) + 1;
     char* vyzva = (char*) calloc(delka_vyzva, sizeof(char));
     sprintf(vyzva, "%s (%s)", sloupec, *string_ktery_upravit);
-    char* odpoved = nacti_string_od_uzivatele(vyzva, false);
+    char* odpoved = NULL;
+    nacti_string_od_uzivatele(&odpoved, vyzva, true);
     if(strcmp(odpoved, "")) {
         kopirovat_string(string_ktery_upravit, odpoved);
     }
@@ -69,7 +75,8 @@ void uprav_int(char* sloupec, int* int_ktery_upravit) {
     int delka_vyzva = strlen(" ()") + strlen(str_int_ktery_upravit) + strlen(sloupec) + 1;
     char* vyzva = (char*) calloc(delka_vyzva, sizeof(char));
     sprintf(vyzva, "%s (%d)", sloupec, *int_ktery_upravit);
-    char* odpoved = nacti_string_od_uzivatele(vyzva, false);
+    char* odpoved = NULL;
+    nacti_string_od_uzivatele(&odpoved, vyzva, false);
     if(strcmp(odpoved, "")) {
         sscanf(odpoved, "%d", int_ktery_upravit);
     }
