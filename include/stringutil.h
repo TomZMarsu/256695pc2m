@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <datum.h>
 
 #define NACTI_VSTUP_VELIKOST_BUFFERU 1024
 
@@ -21,4 +22,7 @@ void uprav_string(char* sloupec, char** string_ktery_upravit);
 
 // Upravi int na zaklade uzivatelskeho vstupu
 void uprav_int(char* sloupec, int* int_ktery_upravit);
+
+// Upravi datum na zaklade uzivatelskeho vstupu
+void uprav_datum(Datum* datum_ktery_upravit);
 #endif

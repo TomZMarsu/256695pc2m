@@ -2,16 +2,12 @@
 
 // Kopie stringu s dynamickou paměťovou alokaci
 void kopirovat_string(char** cil, char* zdroj) {
-    unsigned int delka_stringu = strlen(zdroj);
-
     // Uvolni predchozi pamet cile, aby se zabranilo memory leaku
     if (*cil != NULL) {
         free(*cil);
         *cil = NULL;
     }
 
-    //*cil = calloc(delka_stringu+1, sizeof(char));
-    //strcpy(*cil, zdroj);
     *cil = strdup(zdroj);
 }
 
@@ -76,10 +72,48 @@ void uprav_int(char* sloupec, int* int_ktery_upravit) {
     char* vyzva = (char*) calloc(delka_vyzva, sizeof(char));
     sprintf(vyzva, "%s (%d)", sloupec, *int_ktery_upravit);
     char* odpoved = NULL;
-    nacti_string_od_uzivatele(&odpoved, vyzva, false);
+    nacti_string_od_uzivatele(&odpoved, vyzva, true);
     if(strcmp(odpoved, "")) {
         sscanf(odpoved, "%d", int_ktery_upravit);
     }
     free(odpoved);
     free(vyzva);
+}
+
+void uprav_datum(Datum* datum_ktery_upravit) {
+    char* odpoved = NULL;
+
+    // 41 znaků -> Delka stringu VYZVA_ZACATEK
+    // 1 -> Delka stringu VYZVA_KONEC
+    // DELKA_TEXTOVE_REPREZENTACE -> delka data včetně \0
+    char vyzva[41+2+DELKA_TEXTOVE_REPREZENTACE] = {0};
+
+    // Konstatni retezce
+    const char VYZVA_ZACATEK[] = "Zadej datum ve formatu DD.MM.RRRR HH:MM (";
+    const char VYZVA_KONEC[] = ")";
+
+    // Aktualizace soucasneho data
+    datum_na_string(datum_ktery_upravit);
+
+    // Slouceni retezce
+    sprintf(vyzva, "%s%s%s", VYZVA_ZACATEK, datum_ktery_upravit->textova_reprezentace, VYZVA_KONEC);
+
+    // Nacteni vstupu od uzivatele
+    nacti_string_od_uzivatele(&odpoved, vyzva, true);
+
+    // Zpracovani odpovedi
+    if (strcmp(odpoved, "")) {
+        sscanf(odpoved, "%2d.%2d.%4d %2d:%2d", 
+            &(datum_ktery_upravit->den),
+            &(datum_ktery_upravit->mesic),
+            &(datum_ktery_upravit->rok),
+            &(datum_ktery_upravit->hodiny),
+            &(datum_ktery_upravit->minuty)
+        );
+
+        // Aktualizace noveho data
+        datum_na_string(datum_ktery_upravit);
+    }
+
+    free(odpoved);
 }

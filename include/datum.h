@@ -2,7 +2,10 @@
 #define DATUM_H
 #include <stdio.h>
 #include <malloc.h>
-#define DELKA_TEXTOVE_REPREZENTACE 19
+#include <time.h>
+#include <stdlib.h>
+
+#define DELKA_TEXTOVE_REPREZENTACE 18
 
 typedef struct Datum {
     unsigned short int den;
@@ -23,5 +26,8 @@ Datum* datum_init();
 
 // Dealokace Data
 void smazat_datum(Datum* datum);
+
+// Nastavi datum na dnešek a současnost
+void nastavit_datum_na_dnes(Datum* datum);
 
 #endif

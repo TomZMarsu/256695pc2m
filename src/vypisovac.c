@@ -27,7 +27,7 @@ int vypis_tabulku_z_pozorovani(Pozorovani *pozorovani) {
         SLOUPEC_POZNAMKA
     );
 
-    int pocet_radku = 3;
+    int pocet_radku = 2;
     
     // Jestliže není žádný pták v pozorovaní, vypis pouze hlavicky a dal nepokracuj
     if (pozorovani->prvni_ptak == NULL) {

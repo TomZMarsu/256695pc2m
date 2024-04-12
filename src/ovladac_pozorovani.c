@@ -2,13 +2,15 @@
 
 Pozorovani* vykreslovat_pozorovani_novy() {
     Pozorovani* pozorovani = pozorovani_init();
+    nastavit_datum_na_dnes(pozorovani->datum_pozorovani);
     bool vypisovani_bezi = true;
 
     while(vypisovani_bezi) {
         // Pocet radku pro system mazani radku. Zacina na sedmi, kvůli nasledně vypsané hlavičce
-        int pocet_radku = 5;
+        int pocet_radku = 6;
         printf("------------------UDAJE O POZOROVANI------------------------\n");
-        printf("Datum: %s Misto: %s\n", datum_na_string(pozorovani->datum_pozorovani), pozorovani->poloha);
+        printf("Datum: %s\n", datum_na_string(pozorovani->datum_pozorovani));
+        printf("Misto pozorovani: %s\n", pozorovani->poloha);
         printf("Poznamky: \n%s\n", pozorovani->poznamka);
         printf("------------------------------------------------------------\n");
 
@@ -26,7 +28,11 @@ Pozorovani* vykreslovat_pozorovani_novy() {
             printf(" (2) Upravit ptaka\n");
             printf(" (3) Odstranit ptaka\n");
             printf(" (4) Upravit udaje o pozorovani\n");
-            printf(" (5) Ukončit program\n");
+            printf(" (5) Ulozit pozorovani\n");
+            printf(" (6) Nacist pozorovani\n");
+            printf(" (7) Vratit se zpet do nabidky\n");
+            printf(" (8) Seradit\n");
+            printf(" (9) Ukončit program\n");
             pocet_radku += OPZ_VELIKOST_NABIDKY;
 
             switch (nacti_int_od_uzivatele("Vase volba", true))
@@ -51,13 +57,14 @@ Pozorovani* vykreslovat_pozorovani_novy() {
                 break;
 
             case 4:
-                vstup_ziskan = true;
+                vstup_ziskan = opz_upravit_udaje_o_pozorovani(pozorovani);
                 break;
-
-            case 5:
+            
+            case 9:
                 smazat_pozorovani(pozorovani);
 
                 exit(EXIT_SUCCESS);
+                break;
             
             default:
                 vymazat_radek(OPZ_VELIKOST_NABIDKY);
@@ -84,7 +91,7 @@ Ptak* opz_pridat_ptaka() {
     ptak->pocet_nalezu = nacti_int_od_uzivatele("Pocet nalezu", true);
     nacti_string_od_uzivatele(&(ptak->poznamky), "Poznamky", true);
 
-    vymazat_radek(5);
+    vymazat_radek(3);
     
     return ptak;
 }
@@ -120,7 +127,6 @@ bool opz_upravit_ptaka(Pozorovani** pozorovani_ptr) {
     uprav_int("Pocet", &(vybrany_ptak->pocet_nalezu));
     uprav_string("Poznamka", &(vybrany_ptak->poznamky));
 
-    vymazat_radek(5);
     return true;
 }
 
@@ -162,7 +168,22 @@ bool opz_odstranit_ptaka(Pozorovani** pozorovani_ptr) {
     // Dealokace v paměti
     smazat_ptaka(ptak_na_smazani);
 
+    // Vymazat radky
+    vymazat_radek(1);
+
     // Odstraneni probehlo zdarne
     return true;
 }
 
+bool opz_upravit_udaje_o_pozorovani(Pozorovani* pozorovani) {
+    printf("\nZadejte nove hodnoty (ponechejte prazdne, pokud nechcete upravovat)\n");
+    printf("===========================\n");
+
+    uprav_datum(pozorovani->datum_pozorovani);
+    uprav_string("Poloha", &(pozorovani->poloha));
+    uprav_string("Poznamky", &(pozorovani->poznamka));
+
+    vymazat_radek(4);
+
+    return true;
+}
