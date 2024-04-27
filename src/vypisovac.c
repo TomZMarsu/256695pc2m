@@ -1,20 +1,25 @@
 #include "vypisovac.h"
 
-void vypis_informace_o_ptakovi(Ptak ptak) {
+// Vraci pocet radku
+int vypis_informace_o_ptakovi(Ptak ptak) {
     printf("INFORMACE O PTAKOVI \"%s\":\n", ptak.nazev);
     printf("===============================\n");
     printf("Popis vzhledu: %s\n", ptak.popis_vzhledu);
     printf("Čas výskytu  : %s\n", ptak.vyskyt);
     printf("-------------------------------\n\n");
+    
+    return 6;
 
 }
 
-void vypis_tabulku_z_pozorovani(Pozorovani pozorovani) {
+// Vraci pocet radku
+int vypis_tabulku_z_pozorovani(Pozorovani *pozorovani) {
     const char SLOUPEC_ID[] = "ID";
     const char SLOUPEC_DRUH[] = "DRUH";
     const char SLOUPEC_POCET[] = "POCET";
     const char SLOUPEC_POZNAMKA[] = "POZNAMKA";
-
+    const char DELIC[] = "============================================================\n";
+    printf("%s", DELIC);
     printf("%3s %-20s %5s %s\n", 
         SLOUPEC_ID,
         SLOUPEC_DRUH, 
@@ -22,26 +27,40 @@ void vypis_tabulku_z_pozorovani(Pozorovani pozorovani) {
         SLOUPEC_POZNAMKA
     );
 
-    Ptak nacteny_ptak = *(pozorovani.prvni_ptak);
-    unsigned int ID_pro_ptaka = 1;
+    int pocet_radku = 2;
     
+    // Jestliže není žádný pták v pozorovaní, vypis pouze hlavicky a dal nepokracuj
+    if (pozorovani->prvni_ptak == NULL) {
+        printf("\n        -ZADNY PTAK V SEZNAMU-\n\n");
+        printf("%s", DELIC);
+        return pocet_radku+3;
+    }
+
+    Ptak* nacteny_ptak = pozorovani->prvni_ptak;
+    unsigned int ID_pro_ptaka = 1;
+
     bool byl_nacten_posledni_ptak = false;
     while (!byl_nacten_posledni_ptak) {
-        nacteny_ptak.ID = ID_pro_ptaka;
+        nacteny_ptak->ID = ID_pro_ptaka;
         ID_pro_ptaka++;
 
         printf("%3d %-20s %5d %s\n", 
-            nacteny_ptak.ID, 
-            nacteny_ptak.nazev, 
-            nacteny_ptak.pocet_nalezu, 
-            nacteny_ptak.poznamky
+            nacteny_ptak->ID, 
+            nacteny_ptak->nazev, 
+            nacteny_ptak->pocet_nalezu, 
+            nacteny_ptak->poznamky
         );
+        pocet_radku++;
 
-        if (nacteny_ptak.dalsi_ptak == NULL) {
+        if (nacteny_ptak->dalsi_ptak == NULL) {
             byl_nacten_posledni_ptak = true;
             break;
         }
 
-        nacteny_ptak = *(nacteny_ptak.dalsi_ptak);
+        nacteny_ptak = nacteny_ptak->dalsi_ptak;
     }
+
+    printf("%s", DELIC);
+
+    return pocet_radku;
 }

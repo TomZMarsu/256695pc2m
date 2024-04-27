@@ -5,6 +5,7 @@ set(skola_HEADER
    vypisovac.h
    nacitacdat.h
    stringutil.h
+   ovladac_pozorovani.h
 )
 
 PREPEND(skola_HEADER)
