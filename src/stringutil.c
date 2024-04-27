@@ -50,6 +50,23 @@ int nacti_int_od_uzivatele(char* pozadavek, bool vymazat_vstup) {
     return cislo;
 }
 
+int nacti_overene_int_od_uzivatele(char* pozadavek, bool vymazat_vstup, int min, int max) {
+    int cislo = 0;
+    bool poprve = true;
+    
+    do {
+        if (!poprve && !vymazat_vstup) {
+            vymazat_radek(1);
+        } else {
+            poprve = false;
+        }
+
+        cislo = nacti_int_od_uzivatele(pozadavek, vymazat_vstup);
+    } while (!(cislo >= min && cislo <= max));
+
+    return cislo;
+}
+
 void uprav_string(char* sloupec, char** string_ktery_upravit) {
     int delka_vyzva = strlen(" ()") + strlen(*string_ktery_upravit) + strlen(sloupec) + 1;
     char* vyzva = (char*) calloc(delka_vyzva, sizeof(char));

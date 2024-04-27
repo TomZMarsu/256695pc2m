@@ -25,4 +25,13 @@ Ptak* ptak_init();
 // Dealokace ptaka
 void smazat_ptaka(Ptak* ptak);
 
+// Vycet: Radici podminka pro ptaka
+typedef enum Ptak_radici_podminka {
+    DRUH = 1,
+    POCET,
+    POZNAMKA
+} Ptak_radici_podminka;
+
+// Funkce pro serazeni ptaku
+void seradit_ptaky(Ptak** prvni_ptak_arg, Ptak_radici_podminka radici_podminka, Smer_trizeni smer_trizeni);
 #endif

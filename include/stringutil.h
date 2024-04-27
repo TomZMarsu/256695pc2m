@@ -25,4 +25,14 @@ void uprav_int(char* sloupec, int* int_ktery_upravit);
 
 // Upravi datum na zaklade uzivatelskeho vstupu
 void uprav_datum(Datum* datum_ktery_upravit);
+
+// Wrapper pro nacti_int_od_uzivatele, nacte int na zaklade uzivatelskeho vstupu, pricemz int musi lezet v intervalu <min;max>
+int nacti_overene_int_od_uzivatele(char* pozadavek, bool vymazat_vstup, int min, int max);
+
+// Vyčet - směr třízení
+typedef enum Smer_trizeni {
+    VZESTUPNE = 1,
+    SESTUPNE = 2
+} Smer_trizeni;
+
 #endif
