@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include "ptak.h"
 #include "datum.h"
+#include "main.h"
 
 #define OPZ_VELIKOST_NABIDKY 8
 #define OPZ_VELIKOST_NABIDKY_TRIZENI 4

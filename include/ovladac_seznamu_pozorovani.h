@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include "ptak.h"
 #include "datum.h"
+#include "main.h"
 #include "ovladac_pozorovani.h"
 
 #define OPSZ_VELIKOST_NABIDKY 6
@@ -13,7 +14,7 @@
 #define OPSZ_VELIKOST_NABIDKY_SMERU_TRIZENI 3
 
 // Vykresluje zobrazovac pro hlavni nabidku
-Pozorovani* vykreslovat_seznam_pozorovani();
+Pozorovani* vykreslovat_seznam_pozorovani(Pozorovani** main_prvni_pozorovani_ptr);
 
 // SOUKROMÉ FUNKCE - POLOŽKY MENU
 Pozorovani* opsz_nove_pozorovani();

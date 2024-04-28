@@ -1,4 +1,5 @@
 set(skola_HEADER
+   main.h
    datum.h
    ptak.h
    pozorovani.h

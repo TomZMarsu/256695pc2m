@@ -71,8 +71,7 @@ Pozorovani* vykreslovat_pozorovani(Pozorovani* pozorovani_arg) {
             
             case OPZ_UKONCIT:
                 smazat_pozorovani(pozorovani);
-
-                exit(EXIT_SUCCESS);
+                ukoncit_program();
                 break;
             
             default:

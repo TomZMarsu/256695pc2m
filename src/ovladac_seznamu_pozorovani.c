@@ -1,7 +1,7 @@
 #include "ovladac_seznamu_pozorovani.h"
 
-Pozorovani* vykreslovat_seznam_pozorovani() {
-    Pozorovani* pozorovani = NULL;
+Pozorovani* vykreslovat_seznam_pozorovani(Pozorovani** main_prvni_pozorovani_ptr) {
+    Pozorovani* pozorovani = *main_prvni_pozorovani_ptr;
 
     bool vypisovani_bezi = true;
 
@@ -36,7 +36,8 @@ Pozorovani* vykreslovat_seznam_pozorovani() {
                 if (pozorovani != NULL) {
                     *posledni_pozorovani = nove_pozorovani;
                 } else {
-                    pozorovani = nove_pozorovani;
+                    *main_prvni_pozorovani_ptr = nove_pozorovani;
+                    pozorovani = *main_prvni_pozorovani_ptr;
                 }
                 
                 pocet_radku = 0;
@@ -48,7 +49,7 @@ Pozorovani* vykreslovat_seznam_pozorovani() {
                 break;
             
             case OPSZ_ODSTRANIT_POZOROVANI:
-                //vstup_ziskan = opsz_odstranit_ptaka(&pozorovani);
+                vstup_ziskan = opsz_odstranit_pozorovani(&pozorovani);
                 pocet_radku -= OPSZ_VELIKOST_NABIDKY;
                 break;
 
@@ -57,9 +58,7 @@ Pozorovani* vykreslovat_seznam_pozorovani() {
                 break;
             
             case OPSZ_UKONCIT:
-                smazat_pozorovani(pozorovani);
-
-                exit(EXIT_SUCCESS);
+                ukoncit_program();
                 break;
             
             default:
@@ -103,10 +102,10 @@ bool opsz_prejit_do_pozorovani(Pozorovani* pozorovani, int pocet_radku) {
 
     // Najdi ptaka s danym ID
     Pozorovani* momentalni_pozorovani = pozorovani;
-    while (pozorovani != NULL) {
-        if (pozorovani->ID == id) break;
+    while (momentalni_pozorovani != NULL) {
+        if (momentalni_pozorovani->ID == id) break;
 
-        momentalni_pozorovani = pozorovani->dalsi_pozorovani;
+        momentalni_pozorovani = momentalni_pozorovani->dalsi_pozorovani;
     }
 
     // Pokud je vybrana neplatna polozka, vrat se
@@ -123,38 +122,36 @@ bool opsz_odstranit_pozorovani(Pozorovani** pozorovani_ptr) {
     vymazat_radek(OPSZ_VELIKOST_NABIDKY);
 
     Pozorovani* pozorovani = *pozorovani_ptr;
+    Pozorovani* predchozi_pozorovani = NULL;
 
-    int id = nacti_int_od_uzivatele("Zadejte ID ptaka, ktereho chcete odstranit", true);
+    int id = nacti_int_od_uzivatele("Zadejte ID pozorovani, ktereho chcete odstranit", true);
 
-    // Najdi ptaka s danym ID
-    Ptak** momentalni_ptak = &(pozorovani->prvni_ptak);
-    Ptak** predchozi_ptak = NULL;
-    Ptak** nasledujici_ptak = NULL;
-    while (*momentalni_ptak != NULL) {
-        if ((*momentalni_ptak)->ID == id-1) predchozi_ptak = momentalni_ptak;
-        if ((*momentalni_ptak)->ID == id) break;
-
-        momentalni_ptak = &((*momentalni_ptak)->dalsi_ptak);
+    // Najdi pozorování s daným ID
+    while (pozorovani) {
+        if (pozorovani->ID == id) break;
+        predchozi_pozorovani = pozorovani;
+        pozorovani = pozorovani->dalsi_pozorovani;
     }
 
     // Pokud je vybrana neplatna polozka, vrat se
-    if (*momentalni_ptak == NULL) return false;
+    if (pozorovani == NULL) return false;
 
-    // Nacteni nasledujiciho ptaka
-    nasledujici_ptak = &((*momentalni_ptak)->dalsi_ptak);
+    // Nacteni nasledujiciho pozorovani
+    Pozorovani* nasledujici_pozorovani = pozorovani->dalsi_pozorovani;
 
     // Snímek adresy, která se dealokuje
-    Ptak* ptak_na_smazani = *momentalni_ptak;
+    //Pozorovani* pozorovani_na_smazani = pozorovani;
 
     // Přelinkovaní seznamu ptáku / vyšoupnutí ptáka z lineárního seznamu
-    if (predchozi_ptak == NULL) {
-        (*pozorovani_ptr)->prvni_ptak = *nasledujici_ptak;
+    if (predchozi_pozorovani == NULL) {
+        *pozorovani_ptr = nasledujici_pozorovani;
     } else {
-        (*predchozi_ptak)->dalsi_ptak = *nasledujici_ptak;
+        predchozi_pozorovani->dalsi_pozorovani = nasledujici_pozorovani;
     }
 
     // Dealokace v paměti
-    smazat_ptaka(ptak_na_smazani);
+    smazat_pozorovani(pozorovani);
+    pozorovani = NULL;
 
     // Vymazat radky
     vymazat_radek(1);

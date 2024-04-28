@@ -49,3 +49,14 @@ void smazat_pozorovani(Pozorovani* pozorovani) {
     free(pozorovani->poznamka);
     free(pozorovani);
 }
+
+void smazat_seznam_pozorovani(Pozorovani* prvni_pozorovani) {
+    Pozorovani* momentalni_pozorovani = prvni_pozorovani;
+
+    while (momentalni_pozorovani != NULL) {
+        Pozorovani* tmp = momentalni_pozorovani;
+        momentalni_pozorovani = momentalni_pozorovani->dalsi_pozorovani;
+        smazat_pozorovani(tmp);
+        tmp = NULL;
+    }
+}

@@ -29,4 +29,7 @@ Pozorovani** posledni_pozorovani_v_seznamu(Pozorovani* prvni_pozorovani);
 // Dealokace pozorovani
 void smazat_pozorovani(Pozorovani* pozorovani);
 
+// Dealokace seznamu pozorovani
+void smazat_seznam_pozorovani(Pozorovani* prvni_pozorovani);
+
 #endif
