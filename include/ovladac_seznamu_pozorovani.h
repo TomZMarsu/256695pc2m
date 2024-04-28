@@ -17,7 +17,7 @@ Pozorovani* vykreslovat_seznam_pozorovani();
 
 // SOUKROMÉ FUNKCE - POLOŽKY MENU
 Pozorovani* opsz_nove_pozorovani();
-bool opsz_prejit_do_pozorovani(Pozorovani** pozorovani_ptr);
+bool opsz_prejit_do_pozorovani(Pozorovani* pozorovani_ptr, int pocet_radku);
 bool opsz_odstranit_pozorovani(Pozorovani** pozorovani_ptr);
 bool opsz_seradit(Pozorovani* pozorovani);
 

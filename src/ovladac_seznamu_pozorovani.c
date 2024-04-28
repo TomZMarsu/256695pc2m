@@ -43,8 +43,8 @@ Pozorovani* vykreslovat_seznam_pozorovani() {
                 break;
 
             case OPSZ_PREJIT_DO_POZOROVANI:
-                //vstup_ziskan = opsz_upravit_ptaka(&pozorovani);
-                pocet_radku -= OPSZ_VELIKOST_NABIDKY;
+                vstup_ziskan = opsz_prejit_do_pozorovani(pozorovani, pocet_radku);
+                pocet_radku = 0;
                 break;
             
             case OPSZ_ODSTRANIT_POZOROVANI:
@@ -95,36 +95,25 @@ Pozorovani* opsz_nove_pozorovani() {
     return pozorovani;
 }
 
-bool opsz_prejit_do_pozorovani(Pozorovani** pozorovani_ptr) {
+bool opsz_prejit_do_pozorovani(Pozorovani* pozorovani, int pocet_radku) {
     // Vymazani nabidky
     vymazat_radek(OPSZ_VELIKOST_NABIDKY);
 
-    Pozorovani* pozorovani = *pozorovani_ptr;
-
-    int id = nacti_int_od_uzivatele("Zadejte ID ptaka, ktereho chcete upravit", true);
+    int id = nacti_int_od_uzivatele("Zadejte ID pozorovani, ktereho chcete vstoupit", true);
 
     // Najdi ptaka s danym ID
-    Ptak** momentalni_ptak = &(pozorovani->prvni_ptak);
-    while (*momentalni_ptak != NULL) {
-        Ptak* deref = *momentalni_ptak;
-        if (deref->ID == id) break;
+    Pozorovani* momentalni_pozorovani = pozorovani;
+    while (pozorovani != NULL) {
+        if (pozorovani->ID == id) break;
 
-        momentalni_ptak = &(deref->dalsi_ptak);
+        momentalni_pozorovani = pozorovani->dalsi_pozorovani;
     }
 
     // Pokud je vybrana neplatna polozka, vrat se
-    if (*momentalni_ptak == NULL) return false;
+    if (momentalni_pozorovani == NULL) return false;
 
-    // Pokud je vybrana polozka platna, pokracuj
-    Ptak* vybrany_ptak = *momentalni_ptak;
-
-    printf("Zadejte nove hodnoty (ponechejte prazdne, pokud nechcete upravovat)\n");
-    printf("===========================\n");
-
-    // Uprava NAZVU
-    uprav_string("Druh", &(vybrany_ptak->nazev));
-    uprav_int("Pocet", &(vybrany_ptak->pocet_nalezu));
-    uprav_string("Poznamka", &(vybrany_ptak->poznamky));
+    vymazat_radek(pocet_radku-OPSZ_VELIKOST_NABIDKY+1);
+    vykreslovat_pozorovani(momentalni_pozorovani);
 
     return true;
 }
