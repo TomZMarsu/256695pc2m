@@ -64,3 +64,49 @@ int vypis_tabulku_z_pozorovani(Pozorovani *pozorovani) {
 
     return pocet_radku;
 }
+
+int vypis_tabulku_seznamu_pozorovani(Pozorovani* prvni_pozorovani) {
+    const char SLOUPEC_ID[] = "ID";
+    const char SLOUPEC_DATUM[] = "DATUM";
+    const char SLOUPEC_MISTO[] = "MISTO";
+    const char SLOUPEC_POZNAMKA[] = "POZNAMKA";
+    const char DELIC[] = "============================================================\n";
+    printf("%s", DELIC);
+    printf("%3s %-18s %-15s %s\n", 
+        SLOUPEC_ID,
+        SLOUPEC_DATUM, 
+        SLOUPEC_MISTO, 
+        SLOUPEC_POZNAMKA
+    );
+
+    int pocet_radku = 2;
+    
+    // Jestliže není žádný pták v pozorovaní, vypis pouze hlavicky a dal nepokracuj
+    if (prvni_pozorovani == NULL) {
+        printf("\n        -ZADNE POZOROVANI V SEZNAMU-\n\n");
+        printf("%s", DELIC);
+        return pocet_radku+3;
+    }
+
+    Pozorovani* momentalni_pozorovani = prvni_pozorovani;
+    unsigned int ID_pro_pozorovani = 1;
+
+    while (momentalni_pozorovani) {
+        momentalni_pozorovani->ID = ID_pro_pozorovani;
+        ID_pro_pozorovani++;
+
+        printf("%3d %-18s %-15s %s\n", 
+            momentalni_pozorovani->ID, 
+            momentalni_pozorovani->datum_pozorovani->textova_reprezentace, 
+            momentalni_pozorovani->poloha, 
+            momentalni_pozorovani->poznamka
+        );
+        pocet_radku++;
+
+        momentalni_pozorovani = momentalni_pozorovani->dalsi_pozorovani;
+    }
+
+    printf("%s", DELIC);
+
+    return pocet_radku;
+}

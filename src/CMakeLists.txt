@@ -7,6 +7,7 @@ set(skola_SRC
     ptak.c
     pozorovani.c
     ovladac_pozorovani.c
+    ovladac_seznamu_pozorovani.c
 )
 
 PREPEND(skola_SRC)

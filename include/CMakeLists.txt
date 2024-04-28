@@ -6,6 +6,7 @@ set(skola_HEADER
    nacitacdat.h
    stringutil.h
    ovladac_pozorovani.h
+   ovladac_seznamu_pozorovani.h
 )
 
 PREPEND(skola_HEADER)

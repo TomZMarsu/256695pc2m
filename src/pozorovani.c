@@ -6,6 +6,8 @@ Pozorovani* pozorovani_init() {
     pozorovani->poloha = NULL;
     pozorovani->poznamka = NULL;
     pozorovani->prvni_ptak = NULL;
+    pozorovani->dalsi_pozorovani = NULL;
+    pozorovani->ID = 0;
 
     kopirovat_string(&(pozorovani->poloha), "");
     kopirovat_string(&(pozorovani->poznamka), "");
@@ -17,11 +19,20 @@ Ptak** posledni_ptak_v_pozorovani(Pozorovani* pozorovani) {
     Ptak** momentalne_posledni_ptak = &(pozorovani->prvni_ptak);
 
     while (*momentalne_posledni_ptak != NULL) {
-        Ptak* deref = *momentalne_posledni_ptak;
-        momentalne_posledni_ptak = &(deref->dalsi_ptak);
+        momentalne_posledni_ptak = &((*momentalne_posledni_ptak)->dalsi_ptak);
     }
 
     return momentalne_posledni_ptak;
+}
+
+Pozorovani** posledni_pozorovani_v_seznamu(Pozorovani* prvni_pozorovani) {
+    Pozorovani** momentalni_pozorovani = &(prvni_pozorovani);
+
+    while (*momentalni_pozorovani != NULL) {
+        momentalni_pozorovani = &((*momentalni_pozorovani)->dalsi_pozorovani);
+    }
+
+    return momentalni_pozorovani;
 }
 
 void smazat_pozorovani(Pozorovani* pozorovani) {

@@ -6,9 +6,12 @@
 #include "nacitacdat.h"
 #include "stringutil.h"
 #include "ovladac_pozorovani.h"
+#include "ovladac_seznamu_pozorovani.h"
+
+//TODO: Vyčistit zdejší include seznam
 
 int main() {
-    vykreslovat_pozorovani_novy();
+    vykreslovat_seznam_pozorovani();
 
 
     return 0;
