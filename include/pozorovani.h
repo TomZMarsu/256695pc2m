@@ -3,6 +3,7 @@
 #include "datum.h"
 #include <stdbool.h>
 #include "ptak.h"
+#include <time.h>
 
 typedef struct Pozorovani {
     Datum* datum_pozorovani;
@@ -18,6 +19,9 @@ typedef struct Pozorovani {
 
     // Priznak pro ukladaci system. Jesliže ano, přepiš soubor
     bool doslo_k_zmene;
+
+    // Casova znamka - pouzita jako unikatni nazev souboru
+    char* casova_znamka;
 } Pozorovani;
 
 #include <malloc.h>
