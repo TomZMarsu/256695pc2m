@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 
+// Zdroj: https://stackoverflow.com/questions/46864932/how-to-clear-screen-in-both-windows-and-linux-in-c
+#define VYCISTI_OBRAZOVKU() system("clear || cls")
+
 // ZISKANI ROZMERU TERMINALU
 // Zdroj: https://stackoverflow.com/questions/23369503/get-size-of-terminal-window-rows-columns
 #if defined(_WIN32)
