@@ -1,10 +1,5 @@
 #ifndef DATUM_H
 #define DATUM_H
-#include <stdio.h>
-#include <malloc.h>
-#include <time.h>
-#include <stdlib.h>
-#include <stdbool.h>
 
 #define DELKA_TEXTOVE_REPREZENTACE 18
 
@@ -18,6 +13,12 @@ typedef struct Datum {
 
     char* textova_reprezentace;
 } Datum;
+
+#include <stdio.h>
+#include <malloc.h>
+#include <time.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 // String musí mít alespoň 18 znaků
 char* datum_na_string(Datum* datum);

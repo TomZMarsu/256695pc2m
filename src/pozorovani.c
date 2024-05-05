@@ -69,7 +69,7 @@ Pozorovani* Pozorovani_prohodit_pozorovani(Pozorovani* pozorovani1, Pozorovani* 
     return pozorovani2;
 }
 
-int Pozorovani_pocet_pozorovani(Pozorovani* prvni_pozorovani) {
+int pocet_pozorovani(Pozorovani* prvni_pozorovani) {
     int pocet = 0;
     Pozorovani* momentalni_pozorovani = prvni_pozorovani;
 
@@ -133,7 +133,7 @@ void seradit_seznam_pozorovani(Pozorovani** prvni_pozorovani_arg, Pozorovani_rad
     int j = 0;
     bool vymena = false;
 
-    int pocet = Pozorovani_pocet_pozorovani(*prvni_pozorovani_arg);
+    int pocet = pocet_pozorovani(*prvni_pozorovani_arg);
 
     for (i = 0; i <= pocet; i++) {
         momentalni_pozorovani = prvni_pozorovani_arg;

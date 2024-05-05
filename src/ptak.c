@@ -120,6 +120,19 @@ void seradit_pozorovani(Ptak** prvni_ptak_arg, Ptak_radici_podminka radici_podmi
         Ptak_prevratit_seznam(prvni_ptak_arg);
 }
 
+int pocet_ptaku(Ptak* prvni_ptak) {
+    int pocet = 0;
+
+    Ptak* momentalni_ptak = prvni_ptak;
+
+    while (momentalni_ptak) {
+        momentalni_ptak = momentalni_ptak->dalsi_ptak;
+        pocet++;
+    }
+
+    return pocet;
+}
+
 void smazat_ptaka(Ptak* ptak) {
     free(ptak->nazev);
     ptak->nazev = NULL;

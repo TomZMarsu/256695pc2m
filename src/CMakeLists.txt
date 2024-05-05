@@ -8,6 +8,7 @@ set(skola_SRC
     pozorovani.c
     ovladac_pozorovani.c
     ovladac_seznamu_pozorovani.c
+    spravce_terminalu.c
 )
 
 PREPEND(skola_SRC)

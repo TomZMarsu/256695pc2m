@@ -4,12 +4,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include <datum.h>
+#include "datum.h"
+#include "spravce_terminalu.h"
 
 #define NACTI_VSTUP_VELIKOST_BUFFERU 1024
 
 void kopirovat_string(char** cil, char* zdroj);
-void vymazat_radek(int pocet_radku);
+
 
 // Nacte vstup jako string od uzivatele. NACTI_VSTUP_VELIKOST_BUFFERU určuje maximální počet znaků
 void nacti_string_od_uzivatele(char** cil, char* pozadavek, bool vymazat_vstup);

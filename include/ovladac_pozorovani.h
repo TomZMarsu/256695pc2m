@@ -7,8 +7,9 @@
 #include "ptak.h"
 #include "datum.h"
 #include "main.h"
+#include "spravce_terminalu.h"
 
-#define OPZ_VELIKOST_NABIDKY 8
+#define OPZ_VELIKOST_NABIDKY 10
 #define OPZ_VELIKOST_NABIDKY_TRIZENI 4
 #define OPZ_VELIKOST_NABIDKY_SMERU_TRIZENI 3
 

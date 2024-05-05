@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 
-add_executable(test_vypis_tabulky test_vypis_tabulky.c ../vypisovac.c ../datum.c)
+add_executable(test_vypis_tabulky test_vypis_tabulky.c ../vypisovac.c ../datum.c ../ptak.c ../spravce_terminalu.c ../stringutil.c)
 target_include_directories(test_vypis_tabulky PUBLIC ../../include/)
 add_test(NAME test_vypis_tabulky  COMMAND test_vypis_tabulky)
 
-add_executable(test_vypis_ptaka test_vypis_ptaka.c ../vypisovac.c ../datum.c)
+add_executable(test_vypis_ptaka test_vypis_ptaka.c ../vypisovac.c ../datum.c ../ptak.c ../spravce_terminalu.c ../stringutil.c)
 target_include_directories(test_vypis_ptaka PUBLIC ../../include/)
 add_test(NAME test_vypis_ptaka  COMMAND test_vypis_ptaka)
 
@@ -19,6 +19,7 @@ set(test_nacteni_pozorovani_hlavicka_SRC
     ../stringutil.c
     ../ptak.c
     ../pozorovani.c
+    ../spravce_terminalu.c
 )
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test_nacteni_pozorovani/pozorovani1.dat
      DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tests/test_nacteni_pozorovani)
@@ -33,6 +34,7 @@ set(test_nacteni_pozorovani_hlavicka_prazdne_SRC
     ../stringutil.c
     ../ptak.c
     ../pozorovani.c
+    ../spravce_terminalu.c
 )
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test_nacteni_pozorovani/pozorovani2.dat
      DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tests/test_nacteni_pozorovani)
@@ -47,6 +49,7 @@ set(test_nacteni_pozorovani_cele_SRC
     ../stringutil.c
     ../ptak.c
     ../pozorovani.c
+    ../spravce_terminalu.c
 )
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test_nacteni_pozorovani/pozorovani_cele1.dat
      DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tests/test_nacteni_pozorovani)
@@ -62,6 +65,7 @@ set(test_mazani_radku_SRC
     ../ptak.c
     ../pozorovani.c
     ../vypisovac.c
+    ../spravce_terminalu.c
 )
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/test_nacteni_pozorovani/pozorovani_cele1.dat
      DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/tests/test_mazani_radku)

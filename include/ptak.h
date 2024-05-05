@@ -1,7 +1,5 @@
 #ifndef PTAK_H
 #define PTAK_H
-#include "malloc.h"
-#include "stringutil.h"
 
 typedef struct Ptak {
     char* nazev;
@@ -19,6 +17,9 @@ typedef struct Ptak {
     unsigned int ID;
 } Ptak;
 
+#include "malloc.h"
+#include "stringutil.h"
+
 // Konstruktor pro Ptak
 Ptak* ptak_init();
 
@@ -34,4 +35,7 @@ typedef enum Ptak_radici_podminka {
 
 // Funkce pro serazeni ptaku
 void seradit_pozorovani(Ptak** prvni_ptak_arg, Ptak_radici_podminka radici_podminka, Smer_trizeni smer_trizeni);
+
+// Spocita pocet ptaku v seznamu
+int pocet_ptaku(Ptak* prvni_ptak);
 #endif

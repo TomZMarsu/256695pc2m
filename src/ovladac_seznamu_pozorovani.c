@@ -5,12 +5,28 @@ Pozorovani* vykreslovat_seznam_pozorovani(Pozorovani** main_prvni_pozorovani_ptr
 
     bool vypisovani_bezi = true;
 
+    // Momentalni stranka pro ucely listovani
+    int stranka = 0;
+    int max_stranek = 0;
+
     while(vypisovani_bezi) {
+        VYCISTI_OBRAZOVKU();
+
         // Pocet radku pro system mazani radku. Zacina na sedmi, kvůli nasledně vypsané hlavičce
         int pocet_radku = 0;
 
+        // Načtení výšky terminalu
+        int vyska_terminalu = 0;
+        ziskej_velikost_terminalu(&vyska_terminalu);
+        int max_polozek = vyska_terminalu-REZERVACE_RADKU_OPSZ;
+        int pocet_pozorovani_i = pocet_pozorovani(pozorovani);
+        int max_stranek = (pocet_pozorovani_i-1) / max_polozek; // -1 je korekce, aby nevznikla prazdna strana
+
+        if (stranka < 0) stranka = 0;
+        if (stranka > max_stranek) stranka = max_stranek;
+
         // Vykresleni pozorovani
-        pocet_radku += vypis_tabulku_seznamu_pozorovani(pozorovani) + 1;
+        pocet_radku += vypis_tabulku_seznamu_pozorovani(pozorovani, stranka, pocet_pozorovani_i) + 1;
         printf("\n");
         
         // Ziskani vstupu od uzivatele
@@ -23,6 +39,7 @@ Pozorovani* vykreslovat_seznam_pozorovani(Pozorovani** main_prvni_pozorovani_ptr
             printf(" (3) Odstranit pozorovani\n");
             printf(" (4) Seradit\n");
             printf(" (5) Ukončit program\n");
+            printf("\n (11) <-- STRANKA --> (22)\n");
             pocet_radku += OPSZ_VELIKOST_NABIDKY;
 
             switch (nacti_int_od_uzivatele("Vase volba", true))
@@ -59,6 +76,16 @@ Pozorovani* vykreslovat_seznam_pozorovani(Pozorovani** main_prvni_pozorovani_ptr
             
             case OPSZ_UKONCIT:
                 ukoncit_program();
+                break;
+
+            case 11:
+                if (stranka > 0) stranka--;
+                vstup_ziskan = true;
+                break;
+
+            case 22:
+                if (stranka < max_stranek) stranka++;
+                vstup_ziskan = true;
                 break;
             
             default:

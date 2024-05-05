@@ -6,8 +6,14 @@ Pozorovani* vykreslovat_pozorovani(Pozorovani* pozorovani_arg) {
     if (!pozorovani) pozorovani = pozorovani_init();
 
     bool vypisovani_bezi = true;
+    
+    // Momentalni stranka pro ucely listovani
+    int stranka = 0;
+    int max_stranek = 0;
 
     while(vypisovani_bezi) {
+        VYCISTI_OBRAZOVKU();
+
         // Pocet radku pro system mazani radku. Zacina na sedmi, kvůli nasledně vypsané hlavičce
         int pocet_radku = 6;
         printf("------------------UDAJE O POZOROVANI------------------------\n");
@@ -17,8 +23,18 @@ Pozorovani* vykreslovat_pozorovani(Pozorovani* pozorovani_arg) {
         printf("------------------------------------------------------------\n");
 
 
+        // Načtení výšky terminalu
+        int vyska_terminalu = 0;
+        ziskej_velikost_terminalu(&vyska_terminalu);
+        int max_polozek = vyska_terminalu-REZERVACE_RADKU_OPZ;
+        int pocet_ptaku_i = pocet_ptaku(pozorovani->prvni_ptak);
+        int max_stranek = (pocet_ptaku_i-1) / max_polozek; // -1 je korekce, aby nevznikla prazdna strana
+
+        if (stranka < 0) stranka = 0;
+        if (stranka > max_stranek) stranka = max_stranek;
+
         // Vykresleni pozorovani
-        pocet_radku += vypis_tabulku_z_pozorovani(pozorovani) + 1;
+        pocet_radku += vypis_tabulku_z_pozorovani(pozorovani, stranka, pocet_ptaku_i) + 1;
         printf("\n");
         
         // Ziskani vstupu od uzivatele
@@ -32,7 +48,8 @@ Pozorovani* vykreslovat_pozorovani(Pozorovani* pozorovani_arg) {
             printf(" (4) Upravit udaje o pozorovani\n");
             printf(" (5) Vratit se zpet do nabidky\n");
             printf(" (6) Seradit\n");
-            printf(" (7) Ukončit program\n");
+            printf(" (7) Ukoncit program\n");
+            printf("\n (11) <-- STRANKA --> (22)\n");
             pocet_radku += OPZ_VELIKOST_NABIDKY;
 
             switch (nacti_int_od_uzivatele("Vase volba", true))
@@ -73,6 +90,16 @@ Pozorovani* vykreslovat_pozorovani(Pozorovani* pozorovani_arg) {
             case OPZ_UKONCIT:
                 smazat_pozorovani(pozorovani);
                 ukoncit_program();
+                break;
+
+            case 11:
+                if (stranka > 0) stranka--;
+                vstup_ziskan = true;
+                break;
+
+            case 22:
+                if (stranka < max_stranek) stranka++;
+                vstup_ziskan = true;
                 break;
             
             default:

@@ -8,6 +8,7 @@ set(skola_HEADER
    stringutil.h
    ovladac_pozorovani.h
    ovladac_seznamu_pozorovani.h
+   spravce_terminalu.h
 )
 
 PREPEND(skola_HEADER)
