@@ -54,7 +54,7 @@ Pozorovani* vykreslovat_seznam_pozorovani(Pozorovani** main_prvni_pozorovani_ptr
                 break;
 
             case OPSZ_SERADIT:
-                //vstup_ziskan = opz_seradit(pozorovani);
+                vstup_ziskan = opsz_seradit(&pozorovani);
                 break;
             
             case OPSZ_UKONCIT:
@@ -139,9 +139,6 @@ bool opsz_odstranit_pozorovani(Pozorovani** pozorovani_ptr) {
     // Nacteni nasledujiciho pozorovani
     Pozorovani* nasledujici_pozorovani = pozorovani->dalsi_pozorovani;
 
-    // Snímek adresy, která se dealokuje
-    //Pozorovani* pozorovani_na_smazani = pozorovani;
-
     // Přelinkovaní seznamu ptáku / vyšoupnutí ptáka z lineárního seznamu
     if (predchozi_pozorovani == NULL) {
         *pozorovani_ptr = nasledujici_pozorovani;
@@ -160,14 +157,14 @@ bool opsz_odstranit_pozorovani(Pozorovani** pozorovani_ptr) {
     return true;
 }
 
-bool opsz_seradit(Pozorovani* pozorovani) {
+bool opsz_seradit(Pozorovani** pozorovani) {
     // Vypis nabidku tříd
     printf("TRIDIT PODLE:\n");
-    printf(" (1) Druh\n");
-    printf(" (2) Pocet\n");
+    printf(" (1) Datum\n");
+    printf(" (2) Misto\n");
     printf(" (3) Poznamka\n");
 
-    Ptak_radici_podminka podminka = nacti_overene_int_od_uzivatele("Vase volba", true, 1, OPSZ_VELIKOST_NABIDKY_TRIZENI-1);
+    Pozorovani_radici_podminka podminka = nacti_overene_int_od_uzivatele("Vase volba", true, 1, OPSZ_VELIKOST_NABIDKY_TRIZENI-1);
     vymazat_radek(OPSZ_VELIKOST_NABIDKY_TRIZENI);
 
     // Vypis smer trizeni
@@ -178,7 +175,10 @@ bool opsz_seradit(Pozorovani* pozorovani) {
     Smer_trizeni smer_trizeni = nacti_overene_int_od_uzivatele("Vase volba", true, 1, OPSZ_VELIKOST_NABIDKY_SMERU_TRIZENI-1);
     vymazat_radek(OPSZ_VELIKOST_NABIDKY_SMERU_TRIZENI);
 
-    seradit_ptaky(&(pozorovani->prvni_ptak), podminka, smer_trizeni);
+    seradit_seznam_pozorovani(pozorovani, podminka, smer_trizeni);
+
+    // Korekce
+    vymazat_radek(1);
 
     return true;
 }

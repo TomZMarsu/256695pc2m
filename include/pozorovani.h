@@ -3,6 +3,8 @@
 #include "datum.h"
 #include "ptak.h"
 #include <malloc.h>
+#include "stringutil.h"
+
 
 typedef struct Pozorovani {
     Datum* datum_pozorovani;
@@ -31,5 +33,21 @@ void smazat_pozorovani(Pozorovani* pozorovani);
 
 // Dealokace seznamu pozorovani
 void smazat_seznam_pozorovani(Pozorovani* prvni_pozorovani);
+
+typedef enum Pozorovani_radici_podminka {
+    POZOROVANI_DATUM = 1,
+    POZOROVANI_MISTO,
+    POZOROVANI_POZNAMKA
+} Pozorovani_radici_podminka;
+
+Pozorovani* Pozorovani_prohodit_pozorovani(Pozorovani* pozorovani1, Pozorovani* pozorovani2);
+
+int Pozorovani_pocet_pozorovani(Pozorovani* prvni_pozorovani);
+
+bool Pozorovani_porovnej_pozorovani(Pozorovani* pozorovani1, Pozorovani* pozorovani2, Pozorovani_radici_podminka radici_podminka);
+
+void Pozorovani_prevratit_seznam(Pozorovani** prvni_pozorovani);
+
+void seradit_seznam_pozorovani(Pozorovani** prvni_pozorovani_arg, Pozorovani_radici_podminka radici_podminka, Smer_trizeni smer_trizeni);
 
 #endif

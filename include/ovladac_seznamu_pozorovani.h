@@ -20,7 +20,7 @@ Pozorovani* vykreslovat_seznam_pozorovani(Pozorovani** main_prvni_pozorovani_ptr
 Pozorovani* opsz_nove_pozorovani();
 bool opsz_prejit_do_pozorovani(Pozorovani* pozorovani_ptr, int pocet_radku);
 bool opsz_odstranit_pozorovani(Pozorovani** pozorovani_ptr);
-bool opsz_seradit(Pozorovani* pozorovani);
+bool opsz_seradit(Pozorovani** pozorovani);
 
 // SOUKROMÉ VÝČTOVÉ TYPY
 typedef enum Opsz_nabidka {
