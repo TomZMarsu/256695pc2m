@@ -2,9 +2,6 @@
 #define POZOROVANI_H
 #include "datum.h"
 #include "ptak.h"
-#include <malloc.h>
-#include "stringutil.h"
-
 
 typedef struct Pozorovani {
     Datum* datum_pozorovani;
@@ -18,6 +15,9 @@ typedef struct Pozorovani {
     // Odkaz na dalsi pozorovani v linearnim seznamu
     struct Pozorovani* dalsi_pozorovani;
 } Pozorovani;
+
+#include <malloc.h>
+#include "stringutil.h"
 
 // Konstruktor pro Pozorovani
 Pozorovani* pozorovani_init();

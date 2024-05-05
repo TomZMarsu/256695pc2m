@@ -1,7 +1,5 @@
 #ifndef PTAK_H
 #define PTAK_H
-#include "malloc.h"
-#include "stringutil.h"
 
 typedef struct Ptak {
     char* nazev;
@@ -18,6 +16,9 @@ typedef struct Ptak {
     // ID pro odkazovani pri vypisu
     unsigned int ID;
 } Ptak;
+
+#include "malloc.h"
+#include "stringutil.h"
 
 // Konstruktor pro Ptak
 Ptak* ptak_init();

@@ -11,14 +11,6 @@ void kopirovat_string(char** cil, char* zdroj) {
     *cil = strdup(zdroj);
 }
 
-// Vymaze z konzole dany pocet radku
-void vymazat_radek(int pocet_radku) {
-    for (int i = 0; i < pocet_radku; i++) {
-        printf("\x1b[1F"); // Move to beginning of previous line
-        printf("\x1b[2K"); // Clear entire line
-    }
-}
-
 // Nacte vstup jako string od uzivatele. NACTI_VSTUP_VELIKOST_BUFFERU určuje maximální počet znaků
 void nacti_string_od_uzivatele(char** cil, char* pozadavek, bool vymazat_vstup) {
     char buffer[NACTI_VSTUP_VELIKOST_BUFFERU] = {0};
