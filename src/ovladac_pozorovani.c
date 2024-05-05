@@ -8,6 +8,8 @@ Pozorovani* vykreslovat_pozorovani(Pozorovani* pozorovani_arg) {
     bool vypisovani_bezi = true;
 
     while(vypisovani_bezi) {
+        VYCISTI_OBRAZOVKU();
+        
         // Pocet radku pro system mazani radku. Zacina na sedmi, kvůli nasledně vypsané hlavičce
         int pocet_radku = 6;
         printf("------------------UDAJE O POZOROVANI------------------------\n");

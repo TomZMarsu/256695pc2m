@@ -6,6 +6,8 @@ Pozorovani* vykreslovat_seznam_pozorovani(Pozorovani** main_prvni_pozorovani_ptr
     bool vypisovani_bezi = true;
 
     while(vypisovani_bezi) {
+        VYCISTI_OBRAZOVKU();
+
         // Pocet radku pro system mazani radku. Zacina na sedmi, kvůli nasledně vypsané hlavičce
         int pocet_radku = 0;
 
