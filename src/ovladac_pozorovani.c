@@ -1,8 +1,10 @@
 #include "ovladac_pozorovani.h"
 
-Pozorovani* vykreslovat_pozorovani_novy() {
-    Pozorovani* pozorovani = pozorovani_init();
-    nastavit_datum_na_dnes(pozorovani->datum_pozorovani);
+Pozorovani* vykreslovat_pozorovani(Pozorovani* pozorovani_arg) {
+    Pozorovani* pozorovani = pozorovani_arg;
+
+    if (!pozorovani) pozorovani = pozorovani_init();
+
     bool vypisovani_bezi = true;
 
     while(vypisovani_bezi) {
@@ -35,7 +37,7 @@ Pozorovani* vykreslovat_pozorovani_novy() {
 
             switch (nacti_int_od_uzivatele("Vase volba", true))
             {
-            case PRIDAT_PTAKA:
+            case OPZ_PRIDAT_PTAKA:
                 vstup_ziskan = true;
                 Ptak* novy_ptak = opz_pridat_ptaka();
                 Ptak** posledni_ptak = posledni_ptak_v_pozorovani(pozorovani);
@@ -44,32 +46,33 @@ Pozorovani* vykreslovat_pozorovani_novy() {
                 pocet_radku -= OPZ_VELIKOST_NABIDKY;
                 break;
 
-            case UPRAVIT_PTAKA:
+            case OPZ_UPRAVIT_PTAKA:
                 vstup_ziskan = opz_upravit_ptaka(&pozorovani);
                 pocet_radku -= OPZ_VELIKOST_NABIDKY;
                 break;
             
-            case ODSTRANIT_PTAKA:
+            case OPZ_ODSTRANIT_PTAKA:
                 vstup_ziskan = opz_odstranit_ptaka(&pozorovani);
                 pocet_radku -= OPZ_VELIKOST_NABIDKY;
                 break;
 
-            case UPRAVIT_POZOROVANI:
+            case OPZ_UPRAVIT_POZOROVANI:
                 vstup_ziskan = opz_upravit_udaje_o_pozorovani(pozorovani);
+                pocet_radku -= OPZ_VELIKOST_NABIDKY;
                 break;
 
-            case SERADIT:
+            case OPZ_SERADIT:
                 vstup_ziskan = opz_seradit(pozorovani);
                 break;
 
-            case VRATIT_SE_ZPET:
+            case OPZ_VRATIT_SE_ZPET:
+                vymazat_radek(pocet_radku+1);
                 return pozorovani;
                 break;
             
-            case UKONCIT:
+            case OPZ_UKONCIT:
                 smazat_pozorovani(pozorovani);
-
-                exit(EXIT_SUCCESS);
+                ukoncit_program();
                 break;
             
             default:
@@ -133,6 +136,9 @@ bool opz_upravit_ptaka(Pozorovani** pozorovani_ptr) {
     uprav_int("Pocet", &(vybrany_ptak->pocet_nalezu));
     uprav_string("Poznamka", &(vybrany_ptak->poznamky));
 
+    // Korekce
+    vymazat_radek(3);
+
     return true;
 }
 
@@ -182,6 +188,8 @@ bool opz_odstranit_ptaka(Pozorovani** pozorovani_ptr) {
 }
 
 bool opz_upravit_udaje_o_pozorovani(Pozorovani* pozorovani) {
+    vymazat_radek(OPZ_VELIKOST_NABIDKY);
+
     printf("\nZadejte nove hodnoty (ponechejte prazdne, pokud nechcete upravovat)\n");
     printf("===========================\n");
 
@@ -212,7 +220,7 @@ bool opz_seradit(Pozorovani* pozorovani) {
     Smer_trizeni smer_trizeni = nacti_overene_int_od_uzivatele("Vase volba", true, 1, OPZ_VELIKOST_NABIDKY_SMERU_TRIZENI-1);
     vymazat_radek(OPZ_VELIKOST_NABIDKY_SMERU_TRIZENI);
 
-    seradit_ptaky(&(pozorovani->prvni_ptak), podminka, smer_trizeni);
+    seradit_pozorovani(&(pozorovani->prvni_ptak), podminka, smer_trizeni);
 
     return true;
 }

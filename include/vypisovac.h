@@ -7,5 +7,6 @@
 
 int vypis_informace_o_ptakovi(Ptak ptak);
 int vypis_tabulku_z_pozorovani(Pozorovani* pozorovani);
+int vypis_tabulku_seznamu_pozorovani(Pozorovani* prvni_pozorovani);
 
 #endif

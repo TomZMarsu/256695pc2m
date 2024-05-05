@@ -4,6 +4,7 @@
 #include <malloc.h>
 #include <time.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define DELKA_TEXTOVE_REPREZENTACE 18
 
@@ -30,4 +31,6 @@ void smazat_datum(Datum* datum);
 // Nastavi datum na dnešek a současnost
 void nastavit_datum_na_dnes(Datum* datum);
 
+// Vraci true pokud je DATUM1 mladší než DATUM2
+bool porovnat_datum(Datum* datum1, Datum* datum2);
 #endif

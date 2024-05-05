@@ -1,4 +1,5 @@
 set(skola_HEADER
+   main.h
    datum.h
    ptak.h
    pozorovani.h
@@ -6,6 +7,7 @@ set(skola_HEADER
    nacitacdat.h
    stringutil.h
    ovladac_pozorovani.h
+   ovladac_seznamu_pozorovani.h
 )
 
 PREPEND(skola_HEADER)

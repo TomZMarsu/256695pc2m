@@ -1,15 +1,17 @@
-#include <malloc.h>
-#include "ptak.h"
-#include "pozorovani.h"
-#include "datum.h"
-#include "vypisovac.h"
-#include "nacitacdat.h"
-#include "stringutil.h"
-#include "ovladac_pozorovani.h"
+#include "main.h"
+
+//TODO: Vyčistit zdejší include seznam
+
+Pozorovani* main_prvni_pozorovani = NULL;
 
 int main() {
-    vykreslovat_pozorovani_novy();
-
+    vykreslovat_seznam_pozorovani(&main_prvni_pozorovani);
 
     return 0;
+}
+
+void ukoncit_program() {
+    smazat_seznam_pozorovani(main_prvni_pozorovani);
+
+    exit(EXIT_SUCCESS);
 }

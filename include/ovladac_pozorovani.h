@@ -6,13 +6,14 @@
 #include <stdbool.h>
 #include "ptak.h"
 #include "datum.h"
+#include "main.h"
 
-#define OPZ_VELIKOST_NABIDKY 10
+#define OPZ_VELIKOST_NABIDKY 8
 #define OPZ_VELIKOST_NABIDKY_TRIZENI 4
 #define OPZ_VELIKOST_NABIDKY_SMERU_TRIZENI 3
 
 // Vykresluje zobrazovac pro zcela nove pozorovani
-Pozorovani* vykreslovat_pozorovani_novy();
+Pozorovani* vykreslovat_pozorovani();
 
 // SOUKROMÉ FUNKCE - POLOŽKY MENU
 Ptak* opz_pridat_ptaka();
@@ -23,13 +24,13 @@ bool opz_seradit(Pozorovani* pozorovani);
 
 // SOUKROMÉ VÝČTOVÉ TYPY
 typedef enum Opz_nabidka {
-    PRIDAT_PTAKA = 1,
-    UPRAVIT_PTAKA,
-    ODSTRANIT_PTAKA,
-    UPRAVIT_POZOROVANI,
-    VRATIT_SE_ZPET,
-    SERADIT,
-    UKONCIT
+    OPZ_PRIDAT_PTAKA = 1,
+    OPZ_UPRAVIT_PTAKA,
+    OPZ_ODSTRANIT_PTAKA,
+    OPZ_UPRAVIT_POZOROVANI,
+    OPZ_VRATIT_SE_ZPET,
+    OPZ_SERADIT,
+    OPZ_UKONCIT
 } Opz_nabidka;
 
 #endif

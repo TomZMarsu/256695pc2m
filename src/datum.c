@@ -42,6 +42,43 @@ void nastavit_datum_na_dnes(Datum* datum) {
     datum_na_string(datum);
 }
 
+bool porovnat_datum(Datum* datum1, Datum* datum2) {
+    // Porovnání ROKU
+    if (datum1->rok > datum2->rok) {
+        return true;
+    } else if (datum1->rok < datum2->rok) {
+        return false;
+    }
+
+    // Porovnání MESICE
+    if (datum1->mesic > datum2->mesic) {
+        return true;
+    } else if (datum1->mesic < datum2->mesic) {
+        return false;
+    }
+
+    // Porovnání DNE
+    if (datum1->den > datum2->den) {
+        return true;
+    } else if (datum1->den < datum2->den) {
+        return false;
+    }
+
+    // Porovnání HODIN
+    if (datum1->hodiny > datum2->hodiny) {
+        return true;
+    } else if (datum1->hodiny < datum2->hodiny) {
+        return false;
+    }
+
+    // Porovnání ROKU
+    if (datum1->minuty > datum2->minuty) {
+        return true;
+    } 
+
+    return false;
+}
+
 void smazat_datum(Datum* datum) {
     free(datum->textova_reprezentace);
     free(datum);

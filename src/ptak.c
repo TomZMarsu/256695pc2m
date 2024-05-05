@@ -29,7 +29,7 @@ Ptak* Ptak_prohodit_ptaky(Ptak* ptak1, Ptak* ptak2) {
     return ptak2;
 }
 
-int Ptak_pocet_ptaku(Ptak* prvni_ptak) {
+int Ptak_pocet_pozorovani(Ptak* prvni_ptak) {
     int pocet = 0;
     Ptak* momentalni_ptak = prvni_ptak;
 
@@ -41,18 +41,18 @@ int Ptak_pocet_ptaku(Ptak* prvni_ptak) {
     return pocet;
 }
 
-bool Ptak_porovnej_ptaky(Ptak* ptak1, Ptak* ptak2, Ptak_radici_podminka radici_podminka) {
+bool Ptak_porovnej_pozorovani(Ptak* ptak1, Ptak* ptak2, Ptak_radici_podminka radici_podminka) {
     bool vystup = false;
     switch (radici_podminka) {
-        case POCET:
+        case PTAK_POCET:
             vystup = ptak1->pocet_nalezu > ptak2->pocet_nalezu;
             break;
 
-        case POZNAMKA:
+        case PTAK_POZNAMKA:
             vystup = (strcmp(ptak1->poznamky, ptak2->poznamky) > 0);
             break;
 
-        case DRUH:
+        case PTAK_DRUH:
             vystup = (strcmp(ptak1->nazev, ptak2->nazev) > 0);
             break;
 
@@ -86,14 +86,14 @@ void Ptak_prevratit_seznam(Ptak** prvni_ptak) {
     *prvni_ptak = pred;
 }
 
-void seradit_ptaky(Ptak** prvni_ptak_arg, Ptak_radici_podminka radici_podminka, Smer_trizeni smer_trizeni) {
+void seradit_pozorovani(Ptak** prvni_ptak_arg, Ptak_radici_podminka radici_podminka, Smer_trizeni smer_trizeni) {
     Ptak** momentalni_ptak = NULL;
 
     int i = 0;
     int j = 0;
     bool vymena = false;
 
-    int pocet = Ptak_pocet_ptaku(*prvni_ptak_arg);
+    int pocet = Ptak_pocet_pozorovani(*prvni_ptak_arg);
 
     for (i = 0; i <= pocet; i++) {
         momentalni_ptak = prvni_ptak_arg;
@@ -103,7 +103,7 @@ void seradit_ptaky(Ptak** prvni_ptak_arg, Ptak_radici_podminka radici_podminka, 
             Ptak* ptak1 = *momentalni_ptak;
             Ptak* ptak2 = ptak1->dalsi_ptak;
  
-            if (Ptak_porovnej_ptaky(ptak1, ptak2, radici_podminka)) {
+            if (Ptak_porovnej_pozorovani(ptak1, ptak2, radici_podminka)) {
                 *momentalni_ptak = Ptak_prohodit_ptaky(ptak1, ptak2);
                 vymena = true;
             }
