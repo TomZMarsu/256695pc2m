@@ -9,6 +9,7 @@ set(skola_HEADER
    ovladac_pozorovani.h
    ovladac_seznamu_pozorovani.h
    spravce_terminalu.h
+   ukladac_dat.h
 )
 
 PREPEND(skola_HEADER)

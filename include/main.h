@@ -2,6 +2,7 @@
 #define MAIN_H
 #include "pozorovani.h"
 #include "ovladac_seznamu_pozorovani.h"
+#include "ukladac_dat.h"
 
 int main();
 

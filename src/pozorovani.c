@@ -8,6 +8,9 @@ Pozorovani* pozorovani_init() {
     pozorovani->prvni_ptak = NULL;
     pozorovani->dalsi_pozorovani = NULL;
     pozorovani->ID = 0;
+    pozorovani->doslo_k_zmene = false;
+    pozorovani->casova_znamka = calloc(40,sizeof(char));
+    sprintf(pozorovani->casova_znamka, "%u", (unsigned) time(NULL));
 
     kopirovat_string(&(pozorovani->poloha), "");
     kopirovat_string(&(pozorovani->poznamka), "");
@@ -47,6 +50,7 @@ void smazat_pozorovani(Pozorovani* pozorovani) {
     smazat_datum(pozorovani->datum_pozorovani);
     free(pozorovani->poloha);
     free(pozorovani->poznamka);
+    free(pozorovani->casova_znamka);
     free(pozorovani);
 }
 
