@@ -8,6 +8,7 @@ Pozorovani* pozorovani_init() {
     pozorovani->prvni_ptak = NULL;
     pozorovani->dalsi_pozorovani = NULL;
     pozorovani->ID = 0;
+    pozorovani->doslo_k_zmene = false;
 
     kopirovat_string(&(pozorovani->poloha), "");
     kopirovat_string(&(pozorovani->poznamka), "");

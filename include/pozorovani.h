@@ -1,6 +1,7 @@
 #ifndef POZOROVANI_H
 #define POZOROVANI_H
 #include "datum.h"
+#include <stdbool.h>
 #include "ptak.h"
 
 typedef struct Pozorovani {
@@ -14,6 +15,9 @@ typedef struct Pozorovani {
 
     // Odkaz na dalsi pozorovani v linearnim seznamu
     struct Pozorovani* dalsi_pozorovani;
+
+    // Priznak pro ukladaci system. Jesliže ano, přepiš soubor
+    bool doslo_k_zmene;
 } Pozorovani;
 
 #include <malloc.h>

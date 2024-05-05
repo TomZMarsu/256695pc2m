@@ -56,6 +56,8 @@ Pozorovani* vykreslovat_pozorovani(Pozorovani* pozorovani_arg) {
             {
             case OPZ_PRIDAT_PTAKA:
                 vstup_ziskan = true;
+                pozorovani->doslo_k_zmene = true;
+
                 Ptak* novy_ptak = opz_pridat_ptaka();
                 Ptak** posledni_ptak = posledni_ptak_v_pozorovani(pozorovani);
 
@@ -64,16 +66,19 @@ Pozorovani* vykreslovat_pozorovani(Pozorovani* pozorovani_arg) {
                 break;
 
             case OPZ_UPRAVIT_PTAKA:
+                pozorovani->doslo_k_zmene = true;
                 vstup_ziskan = opz_upravit_ptaka(&pozorovani);
                 pocet_radku -= OPZ_VELIKOST_NABIDKY;
                 break;
             
             case OPZ_ODSTRANIT_PTAKA:
+                pozorovani->doslo_k_zmene = true;
                 vstup_ziskan = opz_odstranit_ptaka(&pozorovani);
                 pocet_radku -= OPZ_VELIKOST_NABIDKY;
                 break;
 
             case OPZ_UPRAVIT_POZOROVANI:
+                pozorovani->doslo_k_zmene = true;
                 vstup_ziskan = opz_upravit_udaje_o_pozorovani(pozorovani);
                 pocet_radku -= OPZ_VELIKOST_NABIDKY;
                 break;
