@@ -35,4 +35,7 @@ typedef enum Ptak_radici_podminka {
 
 // Funkce pro serazeni ptaku
 void seradit_pozorovani(Ptak** prvni_ptak_arg, Ptak_radici_podminka radici_podminka, Smer_trizeni smer_trizeni);
+
+// Spocita pocet ptaku v seznamu
+int pocet_ptaku(Ptak* prvni_ptak);
 #endif

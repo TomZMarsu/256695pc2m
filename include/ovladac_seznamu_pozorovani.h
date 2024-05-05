@@ -8,8 +8,9 @@
 #include "datum.h"
 #include "main.h"
 #include "ovladac_pozorovani.h"
+#include "spravce_terminalu.h"
 
-#define OPSZ_VELIKOST_NABIDKY 6
+#define OPSZ_VELIKOST_NABIDKY 8
 #define OPSZ_VELIKOST_NABIDKY_TRIZENI 4
 #define OPSZ_VELIKOST_NABIDKY_SMERU_TRIZENI 3
 

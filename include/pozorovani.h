@@ -42,7 +42,7 @@ typedef enum Pozorovani_radici_podminka {
 
 Pozorovani* Pozorovani_prohodit_pozorovani(Pozorovani* pozorovani1, Pozorovani* pozorovani2);
 
-int Pozorovani_pocet_pozorovani(Pozorovani* prvni_pozorovani);
+int pocet_pozorovani(Pozorovani* prvni_pozorovani);
 
 bool Pozorovani_porovnej_pozorovani(Pozorovani* pozorovani1, Pozorovani* pozorovani2, Pozorovani_radici_podminka radici_podminka);
 

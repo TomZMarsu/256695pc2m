@@ -35,6 +35,6 @@ int main() {
     dnes.poznamka = "Vetrno";
     dnes.prvni_ptak = &havran;
 
-    vypis_tabulku_z_pozorovani(&dnes);
+    vypis_tabulku_z_pozorovani(&dnes, 0, 0);
     return 0;
 }
